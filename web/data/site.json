@@ -1,0 +1,42 @@
+{
+  "workshop_id": "ai-agents-defence-education",
+  "concept_revision": "6",
+  "platform_stage": "participant-public-r6",
+  "canonical_locale": "en",
+  "supported_locales": [
+    "en",
+    "uk"
+  ],
+  "future_locale_extensibility": true,
+  "participant_runtime_embedded": false,
+  "accepts_model_keys": false,
+  "model_calls": false,
+  "formal_assessment_store": false,
+  "runtime_config": {
+    "default_locale": "en",
+    "enabled_locales": [
+      "en",
+      "uk"
+    ],
+    "locale_labels": {
+      "en": "EN",
+      "uk": "УКР"
+    },
+    "ui_visibility": {
+      "locale_switch": true,
+      "locale_landing": true,
+      "progress_controls": true,
+      "self_checks": true,
+      "troubleshooting": true,
+      "expected_results": true,
+      "checkpoints": true,
+      "workbook_navigation": true,
+      "visual_maps": true,
+      "copy_templates": true,
+      "day_self_checks": true,
+      "reading_progress": true,
+      "day_completion": true
+    },
+    "redirect_disabled_locale": true
+  }
+}

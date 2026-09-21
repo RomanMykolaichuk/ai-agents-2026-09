@@ -1,0 +1,15 @@
+{
+  "copy": "Copy",
+  "copied": "Copied",
+  "copy_failed": "Copy failed",
+  "show_help": "Show help",
+  "hide_help": "Hide help",
+  "check_answer": "Check answer",
+  "choose_answer": "Choose an answer first.",
+  "correct": "Correct.",
+  "incorrect": "Not yet.",
+  "mark_complete": "Mark complete",
+  "completed": "Completed",
+  "reset_progress": "Reset progress",
+  "progress_reset": "Local progress reset."
+}

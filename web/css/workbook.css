@@ -1,0 +1,396 @@
+/* Visual workbook layer for Day 1–Day 5.
+   Loaded by site.js only on participant workbook pages. */
+
+.workbook-page main {
+  max-width: 1180px;
+}
+
+.workbook-page .hero {
+  position: relative;
+  overflow: hidden;
+  border-top: 5px solid var(--accent);
+}
+
+.workbook-page .hero::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -90px;
+  top: -105px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(85,107,47,.16), rgba(85,107,47,0) 70%);
+  pointer-events: none;
+}
+
+.workbook-progress {
+  margin: 1rem 0 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .75rem .9rem;
+}
+
+.workbook-progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.workbook-progress-track {
+  margin-top: .5rem;
+  height: 7px;
+  border-radius: 999px;
+  background: #e2e7df;
+  overflow: hidden;
+}
+
+.workbook-progress-bar {
+  width: var(--workbook-progress, 0%);
+  height: 100%;
+  background: var(--accent);
+  transition: width .15s linear;
+}
+
+.workbook-nav {
+  position: sticky;
+  top: .5rem;
+  z-index: 20;
+  margin: 1rem 0 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 8px 20px rgba(35,45,36,.08);
+  padding: .65rem .75rem;
+  backdrop-filter: blur(8px);
+}
+
+.workbook-nav-title {
+  margin: 0 0 .45rem;
+  font-size: .8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--accent-dark);
+}
+
+.workbook-nav-links {
+  display: flex;
+  gap: .4rem;
+  overflow-x: auto;
+  padding-bottom: .15rem;
+  scrollbar-width: thin;
+}
+
+.workbook-nav a {
+  flex: 0 0 auto;
+  max-width: 16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: .35rem .6rem;
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.workbook-nav a:hover,
+.workbook-nav a.is-current {
+  color: var(--accent-dark);
+  border-color: #cbd4c0;
+  background: #f0f4e9;
+}
+
+.visual-map {
+  margin: 1.25rem 0 2rem;
+  padding: 1.1rem;
+  border: 1px solid #cbd4c0;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #f7f9f4, #eef2e8);
+}
+
+.visual-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: .8rem;
+}
+
+.visual-map-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.visual-map-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.visual-map-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: .55rem;
+  counter-reset: map-step;
+}
+
+.visual-map-node {
+  position: relative;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .35rem;
+  padding: .8rem .8rem .75rem 2.65rem;
+  border: 1px solid #d5dccd;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(35,45,36,.04);
+}
+
+.visual-map-node::before {
+  counter-increment: map-step;
+  content: counter(map-step);
+  position: absolute;
+  left: .75rem;
+  top: .78rem;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.visual-map-node strong {
+  line-height: 1.2;
+}
+
+.visual-map-node span {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.practice-deck {
+  display: grid;
+  gap: 1rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.practice-deck-title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.template-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.template-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  padding: .8rem 1rem;
+  background: #f4f6f1;
+  border-bottom: 1px solid var(--border);
+}
+
+.template-card-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.template-card .command-row {
+  padding: 1rem;
+}
+
+.template-card .command-box {
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+main > h2 {
+  scroll-margin-top: 7.5rem;
+  padding-top: .2rem;
+}
+
+main > h2::before {
+  content: "";
+  display: inline-block;
+  width: .55rem;
+  height: .55rem;
+  margin-right: .5rem;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: translateY(-.08rem);
+}
+
+.guided-steps {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+  counter-reset: guided-step;
+  display: grid;
+  gap: .7rem;
+}
+
+.guided-steps > li {
+  position: relative;
+  counter-increment: guided-step;
+  min-height: 3.3rem;
+  padding: .8rem 1rem .8rem 3.4rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.guided-steps > li::before {
+  content: counter(guided-step);
+  position: absolute;
+  left: .9rem;
+  top: .72rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf1e7;
+  color: var(--accent-dark);
+  border: 1px solid #c9d2bc;
+  font-weight: 800;
+}
+
+.page-sequence {
+  position: relative;
+}
+
+.page-sequence > div {
+  position: relative;
+  border-top: 3px solid var(--accent);
+  min-height: 94px;
+}
+
+.page-sequence > div strong:first-child {
+  color: var(--accent-dark);
+  font-size: 1.02rem;
+}
+
+.workbook-quick-check {
+  margin: 1.5rem 0 2rem;
+  border-left: 5px solid var(--accent);
+  background: #fbfcfa;
+}
+
+.day-completion {
+  margin: 2rem 0 1rem;
+  padding: 1.1rem;
+  border: 1px solid #cbd4c0;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #f3f6ef, #ffffff);
+}
+
+.day-completion h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.2rem;
+}
+
+.day-completion p {
+  margin: 0 0 .8rem;
+  color: var(--muted);
+}
+
+.day-completion .control-button {
+  min-width: 11rem;
+}
+
+.card,
+.interaction,
+.checkpoint,
+.page-sequence > div {
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.card:hover,
+.interaction:hover,
+.page-sequence > div:hover {
+  border-color: #c2cdb5;
+  box-shadow: 0 8px 18px rgba(35,45,36,.06);
+}
+
+.card code,
+.notice code,
+.callout code,
+.checkpoint code {
+  background: #eef1eb;
+  border-radius: 4px;
+  padding: .08rem .28rem;
+}
+
+@media (min-width: 980px) {
+  .visual-map-flow {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(130px, 1fr);
+    grid-template-columns: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .workbook-nav {
+    top: .25rem;
+    margin-left: -.25rem;
+    margin-right: -.25rem;
+  }
+
+  .workbook-progress-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .2rem;
+  }
+
+  .visual-map-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .25rem;
+  }
+
+  .visual-map-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-map-node {
+    min-height: auto;
+  }
+
+  .template-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media print {
+  .workbook-nav,
+  .workbook-progress,
+  .day-completion,
+  .template-card .control-button {
+    display: none !important;
+  }
+
+  .visual-map,
+  .template-card,
+  .guided-steps > li {
+    break-inside: avoid;
+  }
+}
