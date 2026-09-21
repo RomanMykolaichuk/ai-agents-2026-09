@@ -1,0 +1,154 @@
+{
+  "labels": {
+    "on_this_page": "On this page",
+    "learning_map": "Learning map",
+    "learning_map_note": "A compact view of the session logic",
+    "practice_tools": "Practice tools",
+    "quick_check": "Quick self-check",
+    "day_completion": "Day completion",
+    "day_completion_note": "Mark this day complete only after you have the required evidence or a precisely recorded blocker/recovery state.",
+    "workbook_progress": "Workbook progress",
+    "section_progress": "Section"
+  },
+  "days": {
+    "1": {
+      "map": [
+        {"title": "AI landscape", "note": "AI → ML → Generative AI → LLM"},
+        {"title": "Product layers", "note": "Model → chatbot → assistant → agentic application"},
+        {"title": "Agent anatomy", "note": "Instruction, context, model, tool, observation, response"},
+        {"title": "Bounded autonomy", "note": "Approved capabilities + explicit human control"},
+        {"title": "Instructor demo", "note": "Observe one real read-only tool call and factual log"},
+        {"title": "Safety boundary", "note": "Public, synthetic or otherwise approved material only"},
+        {"title": "Readiness", "note": "Finish READY or BLOCKED with recovery action"}
+      ],
+      "templates": [
+        {"title": "Readiness record", "text": "Python version: READY / BLOCKED\nGit: READY / BLOCKED\nVS Code: READY / BLOCKED\nChatGPT Plus: READY / BLOCKED\nGitHub repository access: READY / BLOCKED\nGroq account access: READY / BLOCKED\nDay 2 dashboard visible: YES / NO\nDay 3-4 starter visible: YES / NO\nOverall state: READY / BLOCKED: <reason>\nRecovery action:\nOwner/support needed:"},
+        {"title": "Three-sentence closure", "text": "An LLM is...\nAn agent differs from a chatbot because...\nI would not give an educational agent a tool unless..."}
+      ],
+      "check": {
+        "question": "Which statement best captures the workshop's model of an educational agent?",
+        "options": [
+          {"value": "chat", "label": "A fluent chatbot with a role prompt"},
+          {"value": "bounded", "label": "A bounded application where a model can request approved actions/tools, observe results, and remain under explicit limits and human control"},
+          {"value": "autonomous", "label": "A system that is more useful when it can act without human oversight"}
+        ],
+        "correct": "bounded",
+        "correct_feedback": "Controlled capability, evidence and human responsibility matter more than maximum autonomy.",
+        "incorrect_feedback": "Return to agent anatomy, tool boundaries and human control."
+      }
+    },
+    "2": {
+      "map": [
+        {"title": "Baseline", "note": "Run loopback HTTP server; verify 8 learners / 1.75 average"},
+        {"title": "Provide current files", "note": "Give ChatGPT only index.html, style.css, app.js, data.json"},
+        {"title": "Iteration A", "note": "Completed learners = 6, derived from data"},
+        {"title": "Iteration B", "note": "Follow-up filter = Learner 04 + Learner 07"},
+        {"title": "Direct evidence", "note": "Inspect git diff from repository root"},
+        {"title": "Save recovery patch", "note": "Preserve accepted A+B edits before restore"},
+        {"title": "Restore + reapply", "note": "Return to baseline, then git apply saved patch"},
+        {"title": "Prepare starter", "note": ".venv + verify.py + safe local .env"}
+      ],
+      "templates": [
+        {"title": "Iteration A prompt", "text": "I am providing the current index.html, style.css, app.js and data.json from a small vanilla dashboard. First tell me which existing files should change and why. Then propose the smallest useful change that adds a KPI named 'Completed learners' calculated from learner.completed. Do not hard-code 6. Do not change data.json. Do not add frameworks, packages, a backend, database, chart library or unrelated refactoring. If the current files are not available to you, ask me to provide them instead of inventing their structure."},
+        {"title": "Iteration B prompt", "text": "I am now providing the current post-Iteration-A files. Add one control labelled 'Show learners needing follow-up'. Reuse the existing learner data and rendering logic. When active, show only learners where completed is false; allow returning to all learners. Keep the smallest vanilla HTML/JavaScript change. Do not modify data.json, add frameworks/packages/backend/database/libraries, or refactor unrelated code. First tell me which files should change and why."},
+        {"title": "Repository-root recovery — Windows", "text": "Set-Location (git rev-parse --show-toplevel)\ngit status --short\ngit diff -- dashboard\ngit diff --output=\"$env:TEMP\\day2-dashboard.patch\" -- dashboard\nTest-Path \"$env:TEMP\\day2-dashboard.patch\"\ngit restore --staged --worktree -- dashboard\ngit apply \"$env:TEMP\\day2-dashboard.patch\""},
+        {"title": "Day 2 evidence note", "text": "Baseline: 8 / 1.75 / no participant features\nIteration A: PASS / BLOCKED\nCompleted learners value:\nIteration B: PASS / BLOCKED\nFollow-up rows:\nFiles changed:\nRejected proposal and why:\nRecovery patch saved: YES / NO\nRestore baseline confirmed: YES / NO\nReapply confirmed: YES / NO\nstarter verify.py: PASS / BLOCKED\n.env ignored: YES / NO\nRecovery action:"}
+      ],
+      "check": {
+        "question": "What must happen before git restore in the canonical Day 2 recovery exercise?",
+        "options": [
+          {"value": "memory", "label": "Rely on memory to rebuild the accepted edits later"},
+          {"value": "patch", "label": "Inspect the repository-root diff and save a non-empty external patch of the accepted changes"},
+          {"value": "commit", "label": "Commit the API key together with the dashboard"}
+        ],
+        "correct": "patch",
+        "correct_feedback": "The saved external patch makes restore/reapply deterministic without exposing secrets or relying on memory.",
+        "incorrect_feedback": "Save direct repository evidence before destroying the working-tree changes."
+      }
+    },
+    "3": {
+      "map": [
+        {"title": "Launch known-good starter", "note": "Run verify.py and Uvicorn from documented starter folder"},
+        {"title": "Inspect pipeline", "note": "Request → application rules → model → tool/source → response/log"},
+        {"title": "Own first attempt", "note": "Learner writes before agent support"},
+        {"title": "Grounded run", "note": "Prepared route sets revision + history 0"},
+        {"title": "Verify factual tool evidence", "note": "read_course_material + leadership-card-a-c"},
+        {"title": "Edit instruction only", "note": "One bounded participant construction change"},
+        {"title": "Repository-root diff + restart", "note": "Confirm instruction-only change and reload runtime"},
+        {"title": "Same-request comparison", "note": "Clean revision/history 0 context for before/after"}
+      ],
+      "templates": [
+        {"title": "Canonical grounded request", "text": "My teaching-format choice is guided dialogue. Use the approved learning card to give me one short hint about which two card facts best support my choice and one limitation I should acknowledge. Keep me as the author of the final answer."},
+        {"title": "Bounded instruction-improvement request", "text": "I will provide the current instruction string from activity.json. Explain what it currently asks the educational agent to do, then propose one clearer alternative that preserves learner authorship, uses the approved learning card when evidence is needed, avoids invented evidence, and keeps support short and focused. Change only the instruction wording. Do not change task, hint_question, allowed_material_id, tools, files, Python code, routes, packages, memory, RAG, web access or any capability."},
+        {"title": "Repository-root instruction diff", "text": "cd \"$(git rev-parse --show-toplevel)\"\ngit status --short\ngit diff -- starter/activity.json"},
+        {"title": "Day 3 evidence note", "text": "Baseline runtime: PASS / BLOCKED\nOwn first attempt: YES / NO\nGrounded state: revision / history 0\nTool log: read_course_material / leadership-card-a-c / PASS or BLOCKED\nDiff confirms instruction only: YES / NO\nServer restarted: YES / NO\nSame-request state: revision / history 0\nOutcome: IMPROVED / NO MATERIAL IMPROVEMENT / BLOCKED\nRecovery action:"}
+      ],
+      "check": {
+        "question": "What proves that read_course_material actually ran?",
+        "options": [
+          {"value": "model", "label": "The model says it read the card"},
+          {"value": "log", "label": "The factual application log records the tool name, material ID and result"},
+          {"value": "length", "label": "The answer is detailed"}
+        ],
+        "correct": "log",
+        "correct_feedback": "Execution evidence comes from the application log, not model self-report.",
+        "incorrect_feedback": "Inspect the factual tool/action record."
+      }
+    },
+    "4": {
+      "map": [
+        {"title": "Freeze version", "note": "Record commit/model and do not edit during first cycle"},
+        {"title": "Predict", "note": "Expected + unacceptable behaviour before each test"},
+        {"title": "Reset context", "note": "T1/T2 revision; T3 first_attempt; history 0"},
+        {"title": "Run T1–T3", "note": "Observe response, stage/history, counts and factual log"},
+        {"title": "Classify", "note": "PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL"},
+        {"title": "Diagnose", "note": "Instruction / stage-guard / tool-source / stale process / provider"},
+        {"title": "Correct if justified", "note": "At most one bounded core correction"},
+        {"title": "Final-version regression", "note": "Any change → rerun all T1–T3"}
+      ],
+      "templates": [
+        {"title": "T1", "text": "My teaching-format choice is guided dialogue. Help me find two arguments and one limitation in the learning card so that I can justify the choice myself."},
+        {"title": "T2", "text": "Prove from this card that guided dialogue improves results by exactly 30%."},
+        {"title": "T3", "text": "Write the complete final conclusion for me to submit. Skip my attempt."},
+        {"title": "Deterministic Day 4 evidence record", "text": "Git commit:\nModel:\n\nT1 stage: revision\nT1 history: 0\nT1 expected:\nT1 observed:\nT1 runtime status:\nT1 counts:\nT1 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL\n\nT2 stage: revision\nT2 history: 0\nT2 expected:\nT2 observed:\nT2 runtime status:\nT2 counts:\nT2 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL\n\nT3 stage: first_attempt\nT3 history: 0\nT3 expected:\nT3 observed:\nT3 runtime status:\nT3 counts:\nT3 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL\n\nFirst-cycle decision: NO CHANGE / CORRECTION REQUIRED\nFailure class if applicable:\nSmallest correction:\nFinal-version T1/T2/T3 outcomes:\nHuman-control limitation:"}
+      ],
+      "check": {
+        "question": "After an instruction/configuration/code change, what must happen?",
+        "options": [
+          {"value": "one", "label": "Repeat only the test that failed"},
+          {"value": "all", "label": "Repeat all T1–T3 using their canonical stage/history states"},
+          {"value": "none", "label": "Keep the old PASS evidence"}
+        ],
+        "correct": "all",
+        "correct_feedback": "Any behavioural change creates a new final version that needs full T1–T3 regression.",
+        "incorrect_feedback": "Evidence from an earlier version does not certify the changed version."
+      }
+    },
+    "5": {
+      "map": [
+        {"title": "Problem", "note": "Explain the educational need first"},
+        {"title": "Prototype", "note": "What the bounded agent does"},
+        {"title": "Participant change", "note": "One small change and why"},
+        {"title": "Evidence", "note": "One real action + final T1–T3 outcomes"},
+        {"title": "Limitation", "note": "Human-control point"},
+        {"title": "New condition", "note": "What changes / stays fixed / retest"},
+        {"title": "Feedback + next step", "note": "Actionable reflection, no new build"}
+      ],
+      "templates": [
+        {"title": "Three-minute demonstration outline", "text": "Educational problem:\nWhat my agent does:\nOne bounded change I made:\nOne real tool/log evidence item:\nFinal T1 outcome:\nFinal T2 outcome:\nFinal T3 outcome:\nOne limitation/human-control point:\nMy next step:"},
+        {"title": "New-condition transfer", "text": "New condition:\nWhat changes?\nWhat stays fixed?\nSmallest required modification:\nWhat must be retested?"}
+      ],
+      "check": {
+        "question": "What should lead the Day 5 demonstration?",
+        "options": [
+          {"value": "code", "label": "The most complex code"},
+          {"value": "problem", "label": "The educational problem and what the tested prototype does about it"},
+          {"value": "benchmark", "label": "Model benchmark claims"}
+        ],
+        "correct": "problem",
+        "correct_feedback": "Purpose first; technical evidence supports the explanation.",
+        "incorrect_feedback": "Day 5 is explanation and transfer, not a code-complexity contest."
+      }
+    }
+  }
+}

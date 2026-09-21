@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Day 3 — Building an Educational Agent</title>
+  <link rel="stylesheet" href="../css/site.css">
+  <style>body.rt-canonical-practice-page .practice-deck:not(.canonical-practice){display:none}</style>
+</head>
+<body class="rt-canonical-practice-page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../uk/day-3.html" lang="uk">Українська</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Menu</button></div></div>
+  <nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Workshop"><ul><li><a href="index.html">Start</a></li><li><a href="day-1.html">Day 1</a></li><li><a href="day-2.html">Day 2</a></li><li><a aria-current="page" href="day-3.html">Day 3</a></li><li><a href="day-4.html">Day 4</a></li><li><a href="day-5.html">Day 5</a></li><li><a href="recovery.html">Recovery</a></li><li><a href="resources.html">Resources</a></li></ul></nav>
+</header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Day 3 · 60 minutes · BUILD AN AGENT</p><h1>Building an Educational Agent</h1><p class="lead">Launch the prepared runtime from a known folder, trace the real request → model → tool → source → response/log pipeline, make your own learner attempt, observe one factual tool action, then change one instruction and compare the result.</p><span class="status">Canonical participant path · RT-FIX-1</span></section>
+
+<div class="notice"><strong>Day 3 boundary:</strong> build and understand the existing educational agent. Formal T1–T3 verification remains Day 4. Do not add tools, frameworks, RAG, memory, web access or new architecture.</div>
+
+<h2>1. Canonical launch path</h2>
+<div class="grid">
+  <div class="card"><h3>Where am I?</h3><p>Start inside the repository, then enter <code>starter/</code>. Keep the server terminal open while using the browser.</p></div>
+  <div class="card"><h3>What must already exist?</h3><p><code>.venv</code>, pinned dependencies, successful <code>verify.py</code>, and local ignored <code>.env</code> from Day 2.</p></div>
+  <div class="card"><h3>What should I see?</h3><p>At <code>http://127.0.0.1:8001/</code>: activity, learning card, current instruction/configuration, learner stage, response and execution evidence areas.</p></div>
+  <div class="card"><h3>If launch fails?</h3><p>Fix folder/environment/provider setup first. Do not edit <code>activity.json</code> while the known-good runtime itself is broken.</p></div>
+</div>
+
+<div class="card"><h3>Windows PowerShell — launch</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+Set-Location workshops\ai-agents-defence-education\starter
+.\.venv\Scripts\python.exe verify.py
+.\.venv\Scripts\python.exe -m uvicorn app:app --host 127.0.0.1 --port 8001 --env-file .env</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux — launch</h3><pre><code>cd "$(git rev-parse --show-toplevel)/starter"
+.venv/bin/python verify.py
+.venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8001 --env-file .env</code></pre></div>
+
+<h2>2. Trace the actual agent pipeline</h2>
+<div class="page-sequence">
+  <div><strong>User request</strong><br>Learner asks for bounded help</div>
+  <div><strong>Application rules</strong><br>Task, instruction, stage, limits and allowed material</div>
+  <div><strong>Model call</strong><br>Model interprets the request within those rules</div>
+  <div><strong>Approved tool</strong><br><code>read_course_material</code> can read only the allow-listed card</div>
+  <div><strong>Observation</strong><br>Tool result returns to the application/model context</div>
+  <div><strong>Final response</strong><br>Bounded learner support</div>
+  <div><strong>Factual log</strong><br>Records what the application actually did</div>
+</div>
+<div class="callout"><strong>Evidence rule:</strong> “the model says it used the source” is not proof. Tool name + material ID + result in the application execution log is execution evidence.</div>
+
+<h2>3. Know what you may and may not change</h2>
+<div class="grid">
+  <div class="card"><h3><code>task</code></h3><p>Defines the educational problem. Read it; do not change it in the core Day 3 exercise.</p></div>
+  <div class="card"><h3><code>instruction</code></h3><p>The one participant edit surface for the core exercise. It shapes support behaviour without adding capability.</p></div>
+  <div class="card"><h3><code>hint_question</code></h3><p>Visible support wording. Keep unchanged during the core comparison so the instruction is the main changed variable.</p></div>
+  <div class="card"><h3><code>allowed_material_id</code></h3><p>Fixed source boundary. Do not change it or add arbitrary file/URL access.</p></div>
+</div>
+
+<h2>4. Make your independent first attempt</h2>
+<p>Read Learning Card A–C in the starter and write your own teaching-format choice before asking the agent. Include two card-based reasons and one limitation. The agent is supposed to support revision, not replace the learner’s reasoning.</p>
+
+<h2>5. Run one grounded request</h2>
+<p>Use the starter’s prepared <strong>Load grounded request</strong> control, then send it to the agent. For this Day 3 canonical path, use the prepared control rather than manually retyping the test prompt. After the response, inspect the execution log first.</p>
+<div class="grid">
+  <div class="card"><h3>Expected normal status</h3><p><strong>Completed</strong> when the provider/runtime completes normally.</p></div>
+  <div class="card"><h3>Expected tool evidence</h3><p>One <code>read_course_material</code> call with material ID <code>leadership-card-a-c</code>.</p></div>
+  <div class="card"><h3>Expected answer boundary</h3><p>Short card-grounded support that leaves the learner as author and does not invent evidence.</p></div>
+  <div class="card"><h3>Expected limits</h3><p>Tool/model call counts remain within the displayed runtime constraints.</p></div>
+</div>
+
+<h2>6. Change one instruction only</h2>
+<p>Use ChatGPT Plus only for bounded wording support. Copy the current <code>instruction</code> text—not <code>.env</code>, not the API key—and use the canonical prompt below. Then manually edit only the <code>instruction</code> value in <code>starter/activity.json</code>.</p>
+<div class="notice"><strong>Reject:</strong> proposals that change <code>task</code>, <code>hint_question</code>, <code>allowed_material_id</code>, Python code, tools, routes, dependencies, memory, RAG, web access or other capabilities.</div>
+
+<h2>7. Inspect the exact file change from repository root</h2>
+<div class="card"><h3>Windows PowerShell</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+git status --short
+git diff -- starter/activity.json</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux</h3><pre><code>cd "$(git rev-parse --show-toplevel)"
+git status --short
+git diff -- starter/activity.json</code></pre></div>
+<p>PASS this step only if the diff changes the <code>instruction</code> text and no other field.</p>
+
+<h2>8. Restart and compare the same request</h2>
+<ol>
+  <li>Stop the running Uvicorn process with <code>Ctrl+C</code>.</li>
+  <li>Run the same launch command again from <code>starter/</code>.</li>
+  <li>Hard-refresh <code>http://127.0.0.1:8001/</code>.</li>
+  <li>Confirm the revised instruction is visible.</li>
+  <li>Use the same prepared grounded request again.</li>
+  <li>Compare grounding, learner authorship, usefulness and real tool/log evidence.</li>
+</ol>
+<p>A different response is not automatically better. It is acceptable to record <strong>NO MATERIAL IMPROVEMENT</strong> if the original wording already met the learning purpose.</p>
+
+<h2>9. Recovery</h2>
+<div class="grid">
+  <div class="card"><h3>Old instruction still visible</h3><p>Stop the old server process, relaunch with <code>--env-file .env</code>, then hard-refresh. Treat stale-process state as different from repository state.</p></div>
+  <div class="card"><h3>No tool call</h3><p>Use the prepared grounded request, check the fixed material ID and source configuration. Do not add another tool to force success.</p></div>
+  <div class="card"><h3>Technical error</h3><p>Check provider/model/local environment. Record a technical blocker; do not paste the API key into support chat.</p></div>
+  <div class="card"><h3>AI proposes a large refactor</h3><p>Reject it and restate: change only the instruction string; preserve all tools, files and hard runtime controls.</p></div>
+</div>
+
+<section class="practice-deck canonical-practice" aria-label="Canonical Day 3 practice tools">
+  <h2 class="practice-deck-title">Canonical practice tools</h2>
+  <article class="template-card"><div class="template-card-header"><h3>Bounded instruction-improvement request</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d3-prompt">I will provide the current instruction string from activity.json. Explain what it currently asks the educational agent to do, then propose one clearer alternative that preserves learner authorship, uses the approved learning card when evidence is needed, avoids invented evidence, and keeps support short and focused. Change only the instruction wording. Do not change task, hint_question, allowed_material_id, tools, files, Python code, routes, packages, memory, RAG, web access or any capability.</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d3-prompt">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+  <article class="template-card"><div class="template-card-header"><h3>Day 3 evidence note</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d3-evidence">Baseline runtime: PASS / BLOCKED
+Original instruction:
+Own first attempt completed: YES / NO
+Grounded request route: prepared Load grounded request control
+Original response summary:
+Tool log: read_course_material / leadership-card-a-c / PASS or BLOCKED
+Files changed:
+Diff confirms instruction only: YES / NO
+Revised instruction:
+Server restarted: YES / NO
+Revised same-request response summary:
+Tool/source boundary unchanged: YES / NO
+Outcome: IMPROVED / NO MATERIAL IMPROVEMENT / BLOCKED
+Recovery action if blocked:</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d3-evidence">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+</section>
+
+<h2>10. Day 3 checkpoint</h2>
+<div class="grid">
+  <div class="card"><h3>Architecture evidence</h3><p>You can explain request → application rules → model → tool/source → response/log.</p></div>
+  <div class="card"><h3>Agent-action evidence</h3><p>You observed a factual <code>read_course_material</code> execution entry.</p></div>
+  <div class="card"><h3>Build evidence</h3><p>You changed only <code>instruction</code>, inspected the exact diff, restarted and compared the same grounded request.</p></div>
+  <div class="card"><h3>Day 4 handoff</h3><p>The final version is known-good and ready for formal deterministic T1–T3 testing.</p></div>
+</div>
+
+<h2>60-minute session map</h2>
+<div class="page-sequence"><div><strong>0–8</strong><br>Launch + verify participant path</div><div><strong>8–18</strong><br>Agent pipeline + configuration/capability distinction</div><div><strong>18–28</strong><br>Learning card + own first attempt</div><div><strong>28–38</strong><br>Grounded request + factual log</div><div><strong>38–50</strong><br>Instruction-only change + Git diff + restart</div><div><strong>50–57</strong><br>Same-request comparison</div><div><strong>57–60</strong><br>Evidence note + Day 4 handoff</div></div>
+
+<div class="callout"><strong>Next:</strong> Day 4 changes the question from “does it run?” to “what evidence shows the final version behaves acceptably under fixed tests?”</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · Day 3 · English · RT-FIX-1</div></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>

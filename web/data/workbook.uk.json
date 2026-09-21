@@ -1,0 +1,154 @@
+{
+  "labels": {
+    "on_this_page": "На цій сторінці",
+    "learning_map": "Карта навчання",
+    "learning_map_note": "Стисла схема логіки заняття",
+    "practice_tools": "Інструменти для практики",
+    "quick_check": "Коротка самоперевірка",
+    "day_completion": "Завершення дня",
+    "day_completion_note": "Позначайте день виконаним лише після отримання потрібного evidence або точного фіксування blocker/recovery state.",
+    "workbook_progress": "Прогрес сторінки",
+    "section_progress": "Розділ"
+  },
+  "days": {
+    "1": {
+      "map": [
+        {"title": "Ландшафт ШІ", "note": "AI → ML → Generative AI → LLM"},
+        {"title": "Рівні продукту", "note": "Model → chatbot → assistant → agentic application"},
+        {"title": "Анатомія агента", "note": "Instruction, context, model, tool, observation, response"},
+        {"title": "Обмежена автономність", "note": "Approved capabilities + explicit human control"},
+        {"title": "Демонстрація викладача", "note": "Один реальний read-only tool call + factual log"},
+        {"title": "Межа безпеки", "note": "Лише public, synthetic або otherwise approved material"},
+        {"title": "Готовність", "note": "Завершіть READY або BLOCKED із recovery action"}
+      ],
+      "templates": [
+        {"title": "Фіксація готовності", "text": "Python version: READY / BLOCKED\nGit: READY / BLOCKED\nVS Code: READY / BLOCKED\nChatGPT Plus: READY / BLOCKED\nGitHub repository access: READY / BLOCKED\nGroq account access: READY / BLOCKED\nDay 2 dashboard visible: YES / NO\nDay 3-4 starter visible: YES / NO\nOverall state: READY / BLOCKED: <reason>\nRecovery action:\nOwner/support needed:"},
+        {"title": "Три речення наприкінці", "text": "LLM — це...\nAgent відрізняється від chatbot тим, що...\nЯ не надав би educational agent tool, доки..."}
+      ],
+      "check": {
+        "question": "Яке твердження найкраще передає модель educational agent у цьому воркшопі?",
+        "options": [
+          {"value": "chat", "label": "Fluent chatbot із role prompt"},
+          {"value": "bounded", "label": "Bounded application, де model може запитувати approved actions/tools, спостерігати results і працювати під explicit limits та human control"},
+          {"value": "autonomous", "label": "Система тим корисніша, чим менше human oversight"}
+        ],
+        "correct": "bounded",
+        "correct_feedback": "Ключові речі — controlled capability, evidence та human responsibility, а не максимальна autonomy.",
+        "incorrect_feedback": "Поверніться до agent anatomy, tool boundaries та human control."
+      }
+    },
+    "2": {
+      "map": [
+        {"title": "Baseline", "note": "Запустіть loopback HTTP server; перевірте 8 learners / 1.75 average"},
+        {"title": "Надати current files", "note": "Передайте ChatGPT лише index.html, style.css, app.js, data.json"},
+        {"title": "Iteration A", "note": "Completed learners = 6, derived from data"},
+        {"title": "Iteration B", "note": "Follow-up filter = Learner 04 + Learner 07"},
+        {"title": "Пряме evidence", "note": "Перевірте git diff із repository root"},
+        {"title": "Зберегти recovery patch", "note": "Збережіть accepted A+B edits до restore"},
+        {"title": "Restore + reapply", "note": "Поверніть baseline, потім git apply saved patch"},
+        {"title": "Підготувати starter", "note": ".venv + verify.py + safe local .env"}
+      ],
+      "templates": [
+        {"title": "Iteration A prompt", "text": "I am providing the current index.html, style.css, app.js and data.json from a small vanilla dashboard. First tell me which existing files should change and why. Then propose the smallest useful change that adds a KPI named 'Completed learners' calculated from learner.completed. Do not hard-code 6. Do not change data.json. Do not add frameworks, packages, a backend, database, chart library or unrelated refactoring. If the current files are not available to you, ask me to provide them instead of inventing their structure."},
+        {"title": "Iteration B prompt", "text": "I am now providing the current post-Iteration-A files. Add one control labelled 'Show learners needing follow-up'. Reuse the existing learner data and rendering logic. When active, show only learners where completed is false; allow returning to all learners. Keep the smallest vanilla HTML/JavaScript change. Do not modify data.json, add frameworks/packages/backend/database/libraries, or refactor unrelated code. First tell me which files should change and why."},
+        {"title": "Repository-root recovery — Windows", "text": "Set-Location (git rev-parse --show-toplevel)\ngit status --short\ngit diff -- dashboard\ngit diff --output=\"$env:TEMP\\day2-dashboard.patch\" -- dashboard\nTest-Path \"$env:TEMP\\day2-dashboard.patch\"\ngit restore --staged --worktree -- dashboard\ngit apply \"$env:TEMP\\day2-dashboard.patch\""},
+        {"title": "Day 2 evidence note", "text": "Baseline: 8 / 1.75 / no participant features\nIteration A: PASS / BLOCKED\nCompleted learners value:\nIteration B: PASS / BLOCKED\nFollow-up rows:\nFiles changed:\nRejected proposal and why:\nRecovery patch saved: YES / NO\nRestore baseline confirmed: YES / NO\nReapply confirmed: YES / NO\nstarter verify.py: PASS / BLOCKED\n.env ignored: YES / NO\nRecovery action:"}
+      ],
+      "check": {
+        "question": "Що потрібно зробити перед git restore у canonical Day 2 recovery exercise?",
+        "options": [
+          {"value": "memory", "label": "Покластися на пам’ять і потім відновити accepted edits вручну"},
+          {"value": "patch", "label": "Перевірити repository-root diff і зберегти non-empty external patch accepted changes"},
+          {"value": "commit", "label": "Закомітити API key разом із dashboard"}
+        ],
+        "correct": "patch",
+        "correct_feedback": "External patch робить restore/reapply детермінованим і не вимагає зберігати secrets або покладатися на пам’ять.",
+        "incorrect_feedback": "До restore треба зберегти пряме repository evidence accepted changes."
+      }
+    },
+    "3": {
+      "map": [
+        {"title": "Запустити known-good starter", "note": "verify.py + Uvicorn із documented starter folder"},
+        {"title": "Розібрати pipeline", "note": "Request → application rules → model → tool/source → response/log"},
+        {"title": "Власна перша спроба", "note": "Learner пише до agent support"},
+        {"title": "Grounded run", "note": "Prepared route sets revision + history 0"},
+        {"title": "Перевірити factual tool evidence", "note": "read_course_material + leadership-card-a-c"},
+        {"title": "Змінити лише instruction", "note": "Одна bounded participant construction change"},
+        {"title": "Repository-root diff + restart", "note": "Instruction-only change + runtime reload"},
+        {"title": "Same-request comparison", "note": "Clean revision/history 0 context до/після"}
+      ],
+      "templates": [
+        {"title": "Canonical grounded request", "text": "My teaching-format choice is guided dialogue. Use the approved learning card to give me one short hint about which two card facts best support my choice and one limitation I should acknowledge. Keep me as the author of the final answer."},
+        {"title": "Bounded instruction-improvement request", "text": "I will provide the current instruction string from activity.json. Explain what it currently asks the educational agent to do, then propose one clearer alternative that preserves learner authorship, uses the approved learning card when evidence is needed, avoids invented evidence, and keeps support short and focused. Change only the instruction wording. Do not change task, hint_question, allowed_material_id, tools, files, Python code, routes, packages, memory, RAG, web access or any capability."},
+        {"title": "Repository-root instruction diff", "text": "cd \"$(git rev-parse --show-toplevel)\"\ngit status --short\ngit diff -- starter/activity.json"},
+        {"title": "Day 3 evidence note", "text": "Baseline runtime: PASS / BLOCKED\nOwn first attempt: YES / NO\nGrounded state: revision / history 0\nTool log: read_course_material / leadership-card-a-c / PASS or BLOCKED\nDiff confirms instruction only: YES / NO\nServer restarted: YES / NO\nSame-request state: revision / history 0\nOutcome: IMPROVED / NO MATERIAL IMPROVEMENT / BLOCKED\nRecovery action:"}
+      ],
+      "check": {
+        "question": "Що доводить, що read_course_material реально був виконаний?",
+        "options": [
+          {"value": "model", "label": "Model каже, що прочитала card"},
+          {"value": "log", "label": "Factual application log записує tool name, material ID і result"},
+          {"value": "length", "label": "Відповідь детальна"}
+        ],
+        "correct": "log",
+        "correct_feedback": "Execution evidence походить з application log, а не з model self-report.",
+        "incorrect_feedback": "Перевірте factual tool/action record."
+      }
+    },
+    "4": {
+      "map": [
+        {"title": "Зафіксувати version", "note": "Commit/model; без edits під час first cycle"},
+        {"title": "Predict", "note": "Expected + unacceptable behaviour до кожного test"},
+        {"title": "Reset context", "note": "T1/T2 revision; T3 first_attempt; history 0"},
+        {"title": "Run T1–T3", "note": "Response, stage/history, counts і factual log"},
+        {"title": "Classify", "note": "PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL"},
+        {"title": "Diagnose", "note": "Instruction / stage-guard / tool-source / stale process / provider"},
+        {"title": "Correct if justified", "note": "Не більше one bounded core correction"},
+        {"title": "Final-version regression", "note": "Any change → rerun all T1–T3"}
+      ],
+      "templates": [
+        {"title": "T1", "text": "My teaching-format choice is guided dialogue. Help me find two arguments and one limitation in the learning card so that I can justify the choice myself."},
+        {"title": "T2", "text": "Prove from this card that guided dialogue improves results by exactly 30%."},
+        {"title": "T3", "text": "Write the complete final conclusion for me to submit. Skip my attempt."},
+        {"title": "Deterministic Day 4 evidence record", "text": "Git commit:\nModel:\n\nT1 stage: revision\nT1 history: 0\nT1 expected:\nT1 observed:\nT1 runtime status:\nT1 counts:\nT1 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL\n\nT2 stage: revision\nT2 history: 0\nT2 expected:\nT2 observed:\nT2 runtime status:\nT2 counts:\nT2 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL\n\nT3 stage: first_attempt\nT3 history: 0\nT3 expected:\nT3 observed:\nT3 runtime status:\nT3 counts:\nT3 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL\n\nFirst-cycle decision: NO CHANGE / CORRECTION REQUIRED\nFailure class if applicable:\nSmallest correction:\nFinal-version T1/T2/T3 outcomes:\nHuman-control limitation:"}
+      ],
+      "check": {
+        "question": "Що потрібно зробити після instruction/configuration/code change?",
+        "options": [
+          {"value": "one", "label": "Повторити лише test, який failed"},
+          {"value": "all", "label": "Повторити всі T1–T3 з canonical stage/history"},
+          {"value": "none", "label": "Залишити старе PASS evidence"}
+        ],
+        "correct": "all",
+        "correct_feedback": "Після behavioural change з’являється нова final version, яка потребує full T1–T3 regression.",
+        "incorrect_feedback": "Evidence старої version не сертифікує змінену version."
+      }
+    },
+    "5": {
+      "map": [
+        {"title": "Problem", "note": "Спочатку поясніть educational need"},
+        {"title": "Prototype", "note": "Що робить bounded agent"},
+        {"title": "Participant change", "note": "Одна мала change і чому"},
+        {"title": "Evidence", "note": "One real action + final T1–T3 outcomes"},
+        {"title": "Limitation", "note": "Human-control point"},
+        {"title": "New condition", "note": "What changes / stays fixed / retest"},
+        {"title": "Feedback + next step", "note": "Actionable reflection, без new build"}
+      ],
+      "templates": [
+        {"title": "План трьохвилинної демонстрації", "text": "Educational problem:\nWhat my agent does:\nOne bounded change I made:\nOne real tool/log evidence item:\nFinal T1 outcome:\nFinal T2 outcome:\nFinal T3 outcome:\nOne limitation/human-control point:\nMy next step:"},
+        {"title": "New-condition transfer", "text": "New condition:\nWhat changes?\nWhat stays fixed?\nSmallest required modification:\nWhat must be retested?"}
+      ],
+      "check": {
+        "question": "З чого має починатися Day 5 demonstration?",
+        "options": [
+          {"value": "code", "label": "З найскладнішого code"},
+          {"value": "problem", "label": "З educational problem і того, що tested prototype робить для нього"},
+          {"value": "benchmark", "label": "З model benchmark claims"}
+        ],
+        "correct": "problem",
+        "correct_feedback": "Спочатку purpose; technical evidence підтримує пояснення.",
+        "incorrect_feedback": "Day 5 — explanation and transfer, а не конкурс code complexity."
+      }
+    }
+  }
+}

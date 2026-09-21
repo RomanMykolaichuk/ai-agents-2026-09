@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Day 1 — AI and AI Agents Foundations</title>
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../uk/day-1.html" lang="uk">Українська</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Menu</button></div></div>
+  <nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Workshop"><ul><li><a href="index.html">Start</a></li><li><a aria-current="page" href="day-1.html">Day 1</a></li><li><a href="day-2.html">Day 2</a></li><li><a href="day-3.html">Day 3</a></li><li><a href="day-4.html">Day 4</a></li><li><a href="day-5.html">Day 5</a></li><li><a href="recovery.html">Recovery</a></li><li><a href="resources.html">Resources</a></li></ul></nav>
+</header>
+<main id="main">
+  <section class="hero"><p class="eyebrow">Day 1 · 60 minutes · UNDERSTAND</p><h1>AI and AI Agents Foundations</h1><p class="lead">Build a practical mental model of AI, generative AI, large language models, assistants and agents — then confirm that your software and accounts are ready for the practical work that starts on Day 2.</p><span class="status">Lecture-oriented + readiness practical</span></section>
+
+  <div class="notice"><strong>Day 1 boundary:</strong> today you do not build the educational agent, analyse the full learning-card case, or run T1–T3. The instructor may show a short agent demonstration, but participant agent construction starts on Day 3.</div>
+
+  <h2>What you should be able to explain by the end</h2>
+  <div class="grid">
+    <div class="card"><h3>AI landscape</h3><p>How AI, machine learning, generative AI and LLMs relate without treating them as the same thing.</p></div>
+    <div class="card"><h3>Assistant vs agent</h3><p>Why fluent conversation alone does not make a system an agent.</p></div>
+    <div class="card"><h3>Agent loop</h3><p>How instruction, context, model, approved tool, observation, limits and human control work together.</p></div>
+    <div class="card"><h3>Readiness</h3><p>Whether your machine and accounts are ready, or exactly what remains blocked.</p></div>
+  </div>
+
+  <h2>60-minute session map</h2>
+  <div class="page-sequence">
+    <div><strong>0–5</strong><br>Workshop map + starting question</div>
+    <div><strong>5–15</strong><br>AI → ML → Generative AI → LLM</div>
+    <div><strong>15–27</strong><br>Model, chatbot, assistant, agent</div>
+    <div><strong>27–39</strong><br>Agent anatomy, loop, tools, context</div>
+    <div><strong>39–47</strong><br>Education examples + instructor demo + boundaries</div>
+    <div><strong>47–58</strong><br>Software/account readiness</div>
+    <div><strong>58–60</strong><br>READY / BLOCKED + Day 2 handoff</div>
+  </div>
+
+  <h2>1. Start with one question: what changes when AI can act?</h2>
+  <p>A language model can generate text. A useful agentic application adds something around the model: a goal, bounded context, approved tools or actions, limits, evidence about what happened, and a point where a human remains responsible.</p>
+  <div class="grid">
+    <div class="card"><h3>Generate</h3><p>“Explain this concept.” The model produces text from the prompt and context.</p></div>
+    <div class="card"><h3>Recommend</h3><p>“Suggest which source I should inspect.” The system proposes an action, but does not execute it.</p></div>
+    <div class="card"><h3>Act through a tool</h3><p>“Read the approved learning card and use it for one short hint.” The application may execute an allow-listed read-only tool and return the result to the model.</p></div>
+  </div>
+  <div class="callout"><strong>Opening prompt:</strong> Which of the three examples above requires the application to do more than generate text? What new risks appear when software can act?</div>
+
+  <h2>2. From AI to a large language model</h2>
+  <div class="grid">
+    <div class="card"><h3>Artificial intelligence</h3><p>A broad category of systems designed to perform tasks associated with perception, prediction, language, reasoning or action selection.</p></div>
+    <div class="card"><h3>Machine learning</h3><p>A common way to build AI systems by learning patterns from data rather than encoding every rule manually.</p></div>
+    <div class="card"><h3>Generative AI</h3><p>Models that generate new content such as text, code, images or audio from learned statistical patterns and the current input.</p></div>
+    <div class="card"><h3>Large language model</h3><p>A generative model specialised for language and related representations. It generates likely continuations from context; it is not automatically a source of truth, a workflow, or an authorised actor.</p></div>
+  </div>
+
+  <h3>Why useful answers can still be wrong</h3>
+  <p>An LLM is optimised to generate plausible output, not to guarantee that every statement is supported by an approved source. In education this matters because a polished explanation can still include an unsupported fact, invented citation or overconfident conclusion.</p>
+  <div class="page-sequence">
+    <div><strong>Prompt</strong><br>What the user asks</div>
+    <div><strong>Context</strong><br>What information is available in this turn</div>
+    <div><strong>Generation</strong><br>The model predicts a useful response</div>
+    <div><strong>Verification</strong><br>The application or human checks evidence and boundaries</div>
+  </div>
+
+  <div class="interaction self-check" data-self-check data-correct="b" data-correct-feedback="A model can generate a convincing answer without having verified it against an approved source." data-incorrect-feedback="Fluency is not the same as verification.">
+    <h3>Mini-check 1</h3>
+    <fieldset><legend>Which statement is the safest assumption about an LLM response?</legend>
+      <label><input type="radio" name="d1-q1" value="a"> If it sounds confident, it is probably verified.</label>
+      <label><input type="radio" name="d1-q1" value="b"> It may be useful, but important claims still need evidence or verification.</label>
+      <label><input type="radio" name="d1-q1" value="c"> It is only useful when connected to the Internet.</label>
+    </fieldset>
+    <button class="control-button" type="button" data-self-check-submit>Check answer</button><p class="self-check-feedback" data-self-check-feedback aria-live="polite"></p>
+  </div>
+
+  <h2>3. Model, chatbot, assistant and agent are different layers</h2>
+  <div class="grid">
+    <div class="card"><h3>Model</h3><p>The inference engine. It transforms input context into output.</p></div>
+    <div class="card"><h3>Chatbot</h3><p>A conversational interface around a model. It manages messages and presents responses.</p></div>
+    <div class="card"><h3>Assistant</h3><p>A product that helps a user complete tasks, often with files, context, browsing or other capabilities. In this workshop ChatGPT Plus is a browser-based explanation and coding assistant.</p></div>
+    <div class="card"><h3>Agentic application</h3><p>An application that gives the model an explicit role and boundaries, lets it request approved actions/tools, observes results and continues within a controlled workflow.</p></div>
+  </div>
+
+  <h3>A practical test: “Can the system do something?”</h3>
+  <p>If a system only produces text, calling it an “agent” may add little meaning. The distinction becomes useful when the application can select from approved actions, execute them under rules, observe the result and continue or stop.</p>
+  <div class="grid">
+    <div class="card"><h3>Not enough by itself</h3><p>Role prompt, long answer, personality, chain of messages, or the word “agent” in the interface.</p></div>
+    <div class="card"><h3>Agentic signal</h3><p>Controlled action selection, tool execution, observation of results, explicit limits and traceable evidence.</p></div>
+    <div class="card"><h3>Still not autonomy without limits</h3><p>More autonomy is not automatically better. In education, a narrow and inspectable agent is often easier to justify than a highly autonomous one.</p></div>
+  </div>
+
+  <h2>4. Minimal anatomy of an educational agent</h2>
+  <div class="page-sequence">
+    <div><strong>1 · Goal / instruction</strong><br>What the agent is allowed and expected to support</div>
+    <div><strong>2 · User request</strong><br>The learner or instructor asks for help</div>
+    <div><strong>3 · Context</strong><br>Current task, bounded history and allowed information</div>
+    <div><strong>4 · Model</strong><br>Interprets the request and chooses the next step</div>
+    <div><strong>5 · Tool / action</strong><br>Optional approved operation</div>
+    <div><strong>6 · Observation</strong><br>The application receives the tool result</div>
+    <div><strong>7 · Response / stop</strong><br>The model responds or the workflow ends</div>
+    <div><strong>8 · Human control</strong><br>Review, intervention and responsibility remain explicit</div>
+  </div>
+
+  <h3>The agent loop</h3>
+  <div class="callout"><strong>Think → Act → Observe → Continue or Stop.</strong> This loop is useful only when every action is bounded. In the workshop starter, the model can request one approved read-only tool, the application executes it, records factual evidence, and returns the result to the model.</div>
+
+  <h3>Tools are capabilities, not magic</h3>
+  <p>A tool is an operation the application exposes to the model. It can be as narrow as “read this one approved learning card” or as powerful as changing a calendar, sending a message or updating a database. The risk changes with the capability.</p>
+  <div class="grid">
+    <div class="card"><h3>Read-only tool</h3><p>Lower operational impact. Example: retrieve one approved course material by a fixed identifier.</p></div>
+    <div class="card"><h3>Write/action tool</h3><p>Higher impact. Example: send, change, publish or delete something. Such actions normally need stronger permissions and approval.</p></div>
+    <div class="card"><h3>Tool boundary</h3><p>The model should not gain arbitrary file, URL or system access simply because it asks for it.</p></div>
+  </div>
+
+  <h3>Context is not the same as long-term memory</h3>
+  <p><strong>Context</strong> is the information available for the current reasoning step: the user request, bounded history, instructions and tool results. <strong>Memory</strong> is an optional application mechanism that persists information across interactions. The workshop starter relies on bounded context; persistent learner memory is not required.</p>
+
+  <h3>Levels of autonomy</h3>
+  <div class="page-sequence">
+    <div><strong>Level 0</strong><br>Generate only</div>
+    <div><strong>Level 1</strong><br>Suggest an action; human executes</div>
+    <div><strong>Level 2</strong><br>Use approved read-only tool</div>
+    <div><strong>Level 3</strong><br>Prepare or request a higher-impact action with human approval</div>
+    <div><strong>Higher autonomy</strong><br>Out of scope for this pilot</div>
+  </div>
+  <p>The workshop deliberately stays near the low end of this scale. The goal is to understand the mechanism and control it, not to maximise autonomy.</p>
+
+  <div class="interaction self-check" data-self-check data-correct="c" data-correct-feedback="The workshop agent is useful because the application restricts what it may do and records the real tool action." data-incorrect-feedback="The key is bounded action plus evidence, not maximum autonomy.">
+    <h3>Mini-check 2</h3>
+    <fieldset><legend>Which design best matches this workshop?</legend>
+      <label><input type="radio" name="d1-q2" value="a"> Give the model unrestricted computer access so it can solve anything.</label>
+      <label><input type="radio" name="d1-q2" value="b"> Use a chatbot and call it an agent because it has a role prompt.</label>
+      <label><input type="radio" name="d1-q2" value="c"> Give the application one approved read-only tool, explicit limits and a factual execution log.</label>
+    </fieldset>
+    <button class="control-button" type="button" data-self-check-submit>Check answer</button><p class="self-check-feedback" data-self-check-feedback aria-live="polite"></p>
+  </div>
+
+  <h2>5. Where agents can help in defence education</h2>
+  <p>The examples below are educational and administrative. They do not require real operational data or autonomous military decision-making.</p>
+  <div class="grid">
+    <div class="card"><h3>Guided learner support</h3><p>A learner writes a first attempt. The agent reads one approved learning source and gives a short hint without replacing the learner’s work.</p></div>
+    <div class="card"><h3>Instructor preparation</h3><p>An agent can assemble a draft activity plan from approved course material, while the instructor reviews the pedagogy and final content.</p></div>
+    <div class="card"><h3>Evidence-bound Q&amp;A</h3><p>An agent answers questions only from a defined set of public or approved training materials and clearly states when the source is insufficient.</p></div>
+    <div class="card"><h3>Course workflow support</h3><p>An agent can help structure routine non-sensitive tasks such as checking a submission against an explicit checklist, while leaving the final judgement to the instructor.</p></div>
+  </div>
+
+  <h3>Instructor-only micro-demonstration</h3>
+  <ol>
+    <li>Show the prepared Day 3 starter on the instructor machine.</li>
+    <li>Send one grounded request that requires the approved learning card.</li>
+    <li>Point out the difference between the model’s text and the factual execution log.</li>
+    <li>Show the <code>read_course_material</code> call and the fixed material identifier.</li>
+    <li>Stop. Do not turn Day 1 into participant agent setup or testing.</li>
+  </ol>
+  <div class="callout"><strong>What participants should notice:</strong> the important change is not “the AI sounds smarter.” The application has a controlled capability, evidence of its use, and an explicit boundary.</div>
+
+  <h2>6. Human control is part of the architecture</h2>
+  <div class="grid">
+    <div class="card"><h3>Before</h3><p>Define purpose, allowed data, tools, limits and success criteria.</p></div>
+    <div class="card"><h3>During</h3><p>Keep actions inspectable, bound permissions, surface failures and provide a stop/recovery path.</p></div>
+    <div class="card"><h3>After</h3><p>Review outputs and logs, test expected failure modes and decide whether the system is acceptable for the intended context.</p></div>
+  </div>
+
+  <h3>Safety and data boundary</h3>
+  <div class="notice"><strong>Use only public, synthetic or otherwise approved material.</strong> Do not enter classified/sensitive information, credentials, API keys, private logs or participant personal data into ChatGPT, the learning site, screenshots or shared support channels.</div>
+  <p>Before using any AI service, ask four questions: <strong>What data leaves my device? Where does it go? What can the application do? Who remains responsible?</strong></p>
+
+  <h2>7. Practical task — software and account readiness</h2>
+  <p>The practical goal is deliberately limited: make sure Day 2 can start on time. Do not configure or test the agent runtime yet.</p>
+
+  <div class="interaction-stack">
+    <div class="interaction"><h3>Check Python</h3><div class="command-row"><pre class="command-box" id="d1-python">python --version</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-python">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Expected:</strong> Python 3.12.x on the primary participant baseline. If another version is installed, record it rather than hiding the difference.</div></div>
+    <div class="interaction"><h3>Check Git</h3><div class="command-row"><pre class="command-box" id="d1-git">git --version</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-git">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Expected:</strong> a Git version string and no command-not-found error.</div></div>
+    <div class="interaction"><h3>Check VS Code</h3><div class="command-row"><pre class="command-box" id="d1-code">code --version</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-code">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Expected:</strong> a VS Code version. If the <code>code</code> command is unavailable but VS Code opens normally, record that as a specific environment difference.</div></div>
+    <div class="interaction"><h3>Check repository state</h3><div class="command-row"><pre class="command-box" id="d1-repo">git status --short</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-repo">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Expected:</strong> the authorised workshop repository opens locally and you can see <code>dashboard/</code> and <code>starter/</code>.</div></div>
+  </div>
+
+  <h3>Account/access check</h3>
+  <ol>
+    <li>Confirm sign-in to ChatGPT Plus, GitHub and Groq. Do not paste API keys into this site or ChatGPT.</li>
+    <li>Confirm you can open the authorised workshop repository in VS Code.</li>
+    <li>Locate <code>dashboard/</code> for Day 2 and <code>starter/</code> for Days 3–4. Do not modify them today.</li>
+    <li>Record the final state as <strong>READY</strong> or <strong>BLOCKED: &lt;specific reason&gt;</strong> with the next recovery action.</li>
+  </ol>
+
+  <h3>What counts as READY?</h3>
+  <div class="grid">
+    <div class="card"><h3>Software</h3><p>Python, Git and VS Code are installed and usable.</p></div>
+    <div class="card"><h3>Access</h3><p>You can access ChatGPT Plus, the authorised GitHub repository and your Groq account.</p></div>
+    <div class="card"><h3>Project visibility</h3><p>You can open the repository and locate the Day 2 dashboard and Day 3–4 starter.</p></div>
+    <div class="card"><h3>Known blocker</h3><p>If something fails, the exact reason and recovery owner/action are written down.</p></div>
+  </div>
+
+  <h2>8. Day 1 checkpoint</h2>
+  <div class="checkpoint"><strong>Required evidence:</strong> one readiness note with software versions and account/repository status, ending in either <code>READY</code> or <code>BLOCKED: &lt;reason&gt;</code> plus the next recovery action. No participant agent test is required on Day 1.</div>
+
+  <h3>Two-minute closure</h3>
+  <p>Complete these three sentences:</p>
+  <ol>
+    <li><strong>An LLM is...</strong></li>
+    <li><strong>An agent differs from a chatbot because...</strong></li>
+    <li><strong>I would not give an educational agent a tool unless...</strong></li>
+  </ol>
+
+  <div class="callout"><strong>Next:</strong> Day 2 uses ChatGPT as a supervised coding assistant. You will make a small visible change to a synthetic-data dashboard, inspect the diff, practise restore, and prepare the separate agent starter for Day 3.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · Day 1 · English · UNDERSTAND</div></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>

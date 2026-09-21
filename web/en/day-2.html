@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Day 2 — Vibe Coding and Web Project Basics</title>
+  <link rel="stylesheet" href="../css/site.css">
+  <style>body.rt-canonical-practice-page .practice-deck:not(.canonical-practice){display:none}</style>
+</head>
+<body class="rt-canonical-practice-page">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../uk/day-2.html" lang="uk">Українська</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Menu</button></div></div>
+  <nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Workshop"><ul><li><a href="index.html">Start</a></li><li><a href="day-1.html">Day 1</a></li><li><a aria-current="page" href="day-2.html">Day 2</a></li><li><a href="day-3.html">Day 3</a></li><li><a href="day-4.html">Day 4</a></li><li><a href="day-5.html">Day 5</a></li><li><a href="recovery.html">Recovery</a></li><li><a href="resources.html">Resources</a></li></ul></nav>
+</header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Day 2 · 60 minutes · CREATE WITH AI</p><h1>Vibe Coding and Web Project Basics</h1><p class="lead">Use ChatGPT Plus as a supervised coding assistant on a tiny synthetic-data dashboard. Make two bounded changes, inspect the real repository diff, prove recovery, and prepare the separate educational-agent starter for Day 3.</p><span class="status">Canonical participant path · RT-FIX-1</span></section>
+
+<div class="notice"><strong>Day 2 boundary:</strong> the dashboard is not an agent. Today you practise a controlled software-change workflow. Educational-agent construction starts on Day 3; formal T1–T3 testing belongs to Day 4.</div>
+
+<h2>1. Canonical participant path</h2>
+<div class="grid">
+  <div class="card"><h3>Where am I?</h3><p>Use two terminals. <strong>Terminal A</strong> runs the dashboard server from <code>dashboard/</code>. <strong>Terminal B</strong> returns to the repository root for Git evidence and recovery.</p></div>
+  <div class="card"><h3>What do I run?</h3><p>Use the exact command blocks on this page. Do not guess relative paths and do not run Git recovery commands from an unknown folder.</p></div>
+  <div class="card"><h3>What should I see?</h3><p>Baseline: 8 learners, average attempts 1.75, no Completed learners KPI, no follow-up filter. Final accepted practice: KPI 6 and follow-up rows Learner 04 + Learner 07.</p></div>
+  <div class="card"><h3>If it fails?</h3><p>Stop and identify the failed layer: folder/path, local HTTP server, browser result, Git state, or Day 3 starter setup. Do not compensate by changing synthetic data or adding new frameworks.</p></div>
+</div>
+
+<h2>2. Read the four-file project</h2>
+<div class="grid">
+  <div class="card"><h3><code>index.html</code> = structure</h3><p>Visible page elements: headings, KPI cards, table and controls.</p></div>
+  <div class="card"><h3><code>style.css</code> = presentation</h3><p>Spacing, typography, layout and responsive appearance.</p></div>
+  <div class="card"><h3><code>app.js</code> = behaviour</h3><p>Loads JSON, calculates metrics, filters and renders rows.</p></div>
+  <div class="card"><h3><code>data.json</code> = data</h3><p>Eight fictional learner records. Read them; do not edit them to force the expected answer.</p></div>
+</div>
+
+<h2>3. Launch the baseline first</h2>
+<p>Open a terminal inside the repository. Use one of the following exact routes.</p>
+<div class="card"><h3>Windows PowerShell — Terminal A</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+Set-Location workshops\ai-agents-defence-education\dashboard
+py -3.12 -m http.server 8002 --bind 127.0.0.1</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux — Terminal A</h3><pre><code>cd "$(git rev-parse --show-toplevel)/dashboard"
+python3 -m http.server 8002 --bind 127.0.0.1</code></pre></div>
+<p>Open <code>http://127.0.0.1:8002/</code>. PASS baseline if you see <strong>Total learners = 8</strong>, <strong>Average attempts = 1.75</strong>, eight rows, status <strong>Loaded</strong>, and no participant-created KPI/filter.</p>
+<div class="notice"><strong>If data does not load:</strong> do not open the page with a <code>file://</code> URL. Keep the local HTTP server running and reload <code>http://127.0.0.1:8002/</code>.</div>
+
+<h2>4. Give ChatGPT the actual project context</h2>
+<p>ChatGPT cannot see files on your laptop unless you provide them. For this exercise, attach or paste only these current files:</p>
+<ul><li><code>index.html</code></li><li><code>style.css</code></li><li><code>app.js</code></li><li><code>data.json</code></li></ul>
+<div class="notice"><strong>Do not provide:</strong> <code>.env</code>, API keys, repository ZIP files, private logs, screenshots containing secrets, or unrelated files. If the required current files have not been provided, ChatGPT should ask for them instead of inventing the project structure.</div>
+
+<h2>5. Iteration A — Completed learners</h2>
+<p>Add one derived KPI named <strong>Completed learners</strong>. It must be calculated from <code>learner.completed</code>. Expected value: <strong>6</strong>.</p>
+<ol>
+  <li>Provide the four current dashboard files to ChatGPT.</li>
+  <li>Use the canonical Iteration A prompt below.</li>
+  <li>Ask ChatGPT to name the files it proposes to change <strong>before</strong> showing code.</li>
+  <li>Reject hard-coding, changes to <code>data.json</code>, framework migration, backend/database/package/library additions, and unrelated refactoring.</li>
+  <li>Apply only the accepted minimal change manually in VS Code.</li>
+  <li>Refresh and verify <strong>Completed learners = 6</strong>.</li>
+</ol>
+
+<h2>6. Iteration B — Needs follow-up filter</h2>
+<p>Provide ChatGPT with the <strong>current post-Iteration-A versions</strong> of any files that changed. Add one control labelled <strong>Show learners needing follow-up</strong>. Filter criterion: <code>completed === false</code>. Expected rows: <strong>Learner 04</strong> and <strong>Learner 07</strong>. The control must allow returning to all eight learners.</p>
+<ol>
+  <li>Use the canonical Iteration B prompt below.</li>
+  <li>Prefer one visible control in <code>index.html</code> plus a small extension of the existing render/filter logic in <code>app.js</code>.</li>
+  <li>Verify default view = 8 rows.</li>
+  <li>Activate the filter and verify exactly Learner 04 + Learner 07.</li>
+  <li>Return to all learners and verify 8 rows again.</li>
+</ol>
+
+<h2>7. Evidence and recovery — always from repository root</h2>
+<p>Keep Terminal A running. Open <strong>Terminal B</strong> inside the repository and first return to the repository root. Then inspect, save, restore and reapply the accepted change.</p>
+<div class="card"><h3>Windows PowerShell — Terminal B</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+git status --short
+git diff -- dashboard
+git diff --output="$env:TEMP\day2-dashboard.patch" -- dashboard
+Test-Path "$env:TEMP\day2-dashboard.patch"
+git restore --staged --worktree -- dashboard
+git status --short
+git apply "$env:TEMP\day2-dashboard.patch"
+git diff -- dashboard</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux — Terminal B</h3><pre><code>cd "$(git rev-parse --show-toplevel)"
+git status --short
+git diff -- dashboard
+git diff --output=/tmp/day2-dashboard.patch -- dashboard
+test -s /tmp/day2-dashboard.patch && echo "patch saved"
+git restore --staged --worktree -- dashboard
+git status --short
+git apply /tmp/day2-dashboard.patch
+git diff -- dashboard</code></pre></div>
+<p>After <code>git restore</code>, refresh the browser and confirm the baseline returns. After <code>git apply</code>, refresh again and confirm KPI = 6 and the follow-up filter = 2. The saved patch is the recovery source for this exercise; you do not need to reconstruct accepted changes from memory.</p>
+
+<h2>8. Prepare the Day 3 starter</h2>
+<p>Return to the repository root, enter <code>starter/</code>, prepare the Python environment, and create <code>.env</code> only if it does not already exist.</p>
+<div class="card"><h3>Windows PowerShell</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+Set-Location workshops\ai-agents-defence-education\starter
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe verify.py
+if (-not (Test-Path .env)) { Copy-Item .env.example .env } else { Write-Host ".env exists; not overwritten" }
+git check-ignore -v .env</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux</h3><pre><code>cd "$(git rev-parse --show-toplevel)/starter"
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python verify.py
+[ -f .env ] || cp .env.example .env
+git check-ignore -v .env</code></pre></div>
+<p>Edit the local <code>.env</code> in VS Code and add your own Groq key there only. Never paste the key into ChatGPT, the workbook, screenshots or shared chat. If time allows, start Uvicorn and check <code>/api/health</code>; this confirms local application health, not credential validity and not Day 3 agent evidence.</p>
+
+<section class="practice-deck canonical-practice" aria-label="Canonical Day 2 practice tools">
+  <h2 class="practice-deck-title">Canonical practice tools</h2>
+  <article class="template-card"><div class="template-card-header"><h3>Iteration A prompt</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d2-a">I am providing the current index.html, style.css, app.js and data.json from a small vanilla dashboard. First tell me which existing files should change and why. Then propose the smallest useful change that adds a KPI named "Completed learners" calculated from learner.completed. Do not hard-code 6. Do not change data.json. Do not add frameworks, packages, a backend, database, chart library or unrelated refactoring. If the current files are not available to you, ask me to provide them instead of inventing their structure.</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d2-a">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+  <article class="template-card"><div class="template-card-header"><h3>Iteration B prompt</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d2-b">I am now providing the current post-Iteration-A files. Add one control labelled "Show learners needing follow-up". Reuse the existing learner data and rendering logic. When active, show only learners where completed is false; allow returning to all learners. Keep the smallest vanilla HTML/JavaScript change. Do not modify data.json, add frameworks/packages/backend/database/libraries, or refactor unrelated code. First tell me which files should change and why.</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d2-b">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+  <article class="template-card"><div class="template-card-header"><h3>Day 2 evidence note</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d2-evidence">Baseline: 8 learners / average attempts 1.75 / no participant features
+Iteration A: PASS / BLOCKED
+Completed learners value:
+Iteration B: PASS / BLOCKED
+Follow-up rows:
+Files changed:
+One AI proposal I rejected and why:
+What git diff proved:
+Recovery patch saved: YES / NO
+Restore to baseline confirmed: YES / NO
+Reapply confirmed: YES / NO
+starter verify.py: PASS / BLOCKED
+.env ignored by Git: YES / NO
+Recovery action if blocked:</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d2-evidence">Copy</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+</section>
+
+<h2>9. What counts as Day 2 completion?</h2>
+<div class="grid">
+  <div class="card"><h3>Software-change evidence</h3><p>Baseline works; Iteration A shows 6; Iteration B shows Learner 04 + Learner 07 and can return to all 8.</p></div>
+  <div class="card"><h3>Review evidence</h3><p>You can explain which files changed and name at least one proposal you rejected for scope or correctness reasons.</p></div>
+  <div class="card"><h3>Recovery evidence</h3><p>You inspected the diff from repository root, saved the accepted patch, restored the baseline, then reapplied and reverified the accepted version.</p></div>
+  <div class="card"><h3>Day 3 readiness</h3><p><code>verify.py</code> passes or has a precise blocker; local <code>.env</code> exists without being overwritten and is ignored by Git.</p></div>
+</div>
+
+<h2>60-minute session map</h2>
+<div class="page-sequence"><div><strong>0–7</strong><br>Controlled vibe-coding loop + four-file map</div><div><strong>7–14</strong><br>Baseline + ChatGPT file handoff</div><div><strong>14–27</strong><br>Iteration A</div><div><strong>27–38</strong><br>Iteration B</div><div><strong>38–48</strong><br>Diff + saved patch + restore + reapply</div><div><strong>48–57</strong><br>Starter preparation</div><div><strong>57–60</strong><br>Evidence note + Day 3 handoff</div></div>
+
+<div class="callout"><strong>Next:</strong> Day 3 leaves the dashboard behind. You will launch the prepared starter, inspect the real agent pipeline, observe a real <code>read_course_material</code> action, then make one bounded instruction change.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · Day 2 · English · RT-FIX-1</div></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>
