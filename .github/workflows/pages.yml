@@ -1,6 +1,13 @@
-name: Deploy participant learning platform
+name: Deploy Web to GitHub Pages
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "web/**"
+      - ".github/workflows/pages.yml"
+
   workflow_dispatch:
 
 permissions:
@@ -17,16 +24,21 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
-      - name: Configure Pages
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Upload static site
+
+      - name: Upload web folder
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./web
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
