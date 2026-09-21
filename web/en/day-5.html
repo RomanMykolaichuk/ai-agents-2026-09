@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Day 5 — Demonstration, Discussion and Feedback</title><link rel="stylesheet" href="../css/site.css"></head>
+<body><a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../uk/day-5.html" lang="uk">Українська</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Menu</button></div></div><nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Workshop"><ul><li><a href="index.html">Start</a></li><li><a href="day-1.html">Day 1</a></li><li><a href="day-2.html">Day 2</a></li><li><a href="day-3.html">Day 3</a></li><li><a href="day-4.html">Day 4</a></li><li><a aria-current="page" href="day-5.html">Day 5</a></li><li><a href="recovery.html">Recovery</a></li><li><a href="resources.html">Resources</a></li></ul></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Day 5 · 60 minutes · EXPLAIN, DISCUSS, TRANSFER</p><h1>Demonstration, Discussion and Feedback</h1><p class="lead">Turn four days of building and testing into a concise professional explanation: what educational problem the prototype addresses, what the agent actually does, what evidence supports its behaviour, where its limits remain, and what you would do next.</p><span class="status">No major new build · evidence + reflection + transfer</span></section>
+
+<div class="notice"><strong>Day 5 boundary:</strong> do not create a new feature simply to make the demonstration more impressive. Demonstrate the final tested version from Day 4. If you change instruction, configuration or code, the required Day 4 T1–T3 set must be rerun before the new version is described as tested.</div>
+
+<h2>Learning goals</h2>
+<div class="grid">
+  <div class="card"><h3>Explain purpose before technology</h3><p>Start with the learner/instructor need, then explain how the prototype supports it.</p></div>
+  <div class="card"><h3>Show evidence, not claims</h3><p>Use one real tool/log item and the final T1–T3 record rather than saying only “the agent works.”</p></div>
+  <div class="card"><h3>State limits without hiding them</h3><p>Identify one human-control point and one condition not validated by this workshop.</p></div>
+  <div class="card"><h3>Transfer the pattern</h3><p>Respond to one new condition by explaining what would change and what would need retesting—without live coding.</p></div>
+  <div class="card"><h3>Give actionable feedback</h3><p>Separate workshop-content feedback, technical blockers and your own next-step idea.</p></div>
+</div>
+
+<h2>1. Reopen the final tested version</h2>
+<p>Before presenting, confirm that the configuration and evidence belong to the same final Day 4 version.</p>
+<div class="grid">
+  <div class="card"><h3>Version</h3><p>Know the local checkpoint/commit or other clear identity of the version you are showing.</p></div>
+  <div class="card"><h3>Tool evidence</h3><p>Have one real <code>read_course_material</code> log entry ready to show without exposing secrets.</p></div>
+  <div class="card"><h3>Test evidence</h3><p>Have the final T1, T2 and T3 results from that same version.</p></div>
+  <div class="card"><h3>Limitation</h3><p>Bring one concrete human-control or validation limitation rather than a generic “AI can make mistakes.”</p></div>
+</div>
+
+<h2>2. Three-minute demonstration structure</h2>
+<p>A strong demonstration is a short argument, not a tour of every file. Use this order:</p>
+<div class="page-sequence">
+  <div><strong>Problem</strong><br>What learner/instructor action needs support?</div>
+  <div><strong>Prototype</strong><br>What does the agent do—and what does it not do?</div>
+  <div><strong>Bounded change</strong><br>What one participant-controlled change did you make?</div>
+  <div><strong>Real action</strong><br>Show one factual tool/log record</div>
+  <div><strong>Tests</strong><br>Summarise final T1–T3 results</div>
+  <div><strong>Limitation</strong><br>Where is human judgment still necessary?</div>
+  <div><strong>Next step</strong><br>What would you validate or adapt next?</div>
+</div>
+
+<h2>3. Demonstration quality checklist</h2>
+<div class="card"><table><thead><tr><th>Dimension</th><th>A clear demonstration shows…</th></tr></thead><tbody>
+<tr><td>Educational purpose</td><td>a specific learner/instructor need, not “AI is useful”</td></tr>
+<tr><td>Agent explanation</td><td>instruction + model + approved tool/source + boundary in plain language</td></tr>
+<tr><td>Participant authorship</td><td>one bounded change the participant understands and can explain</td></tr>
+<tr><td>Execution evidence</td><td>one observable factual tool/log item</td></tr>
+<tr><td>Testing evidence</td><td>final-version T1–T3 result, including correction/retest or NO CHANGE decision</td></tr>
+<tr><td>Responsible limits</td><td>one concrete limitation/human-control point and no production-readiness overclaim</td></tr>
+</tbody></table></div>
+
+<h3>Mini-check — what should lead the demo?</h3>
+<div class="interaction self-check" data-self-check data-correct="problem" data-correct-feedback="Correct. Lead with the educational problem, then show the prototype and evidence as the response to that problem." data-incorrect-feedback="Day 5 is not a code-complexity contest. Start with the educational need.">
+  <fieldset><legend>What should be the first sentence of a strong Day 5 demonstration?</legend>
+    <label><input type="radio" name="d5-check-1" value="files"> “My project has these files and libraries…”</label>
+    <label><input type="radio" name="d5-check-1" value="problem"> “The educational problem I wanted to support was…”</label>
+    <label><input type="radio" name="d5-check-1" value="model"> “The model is very powerful…”</label>
+  </fieldset>
+  <button class="control-button" type="button" data-self-check-submit>Check answer</button><p class="self-check-feedback" data-self-check-feedback></p>
+</div>
+
+<h2>4. One new condition — transfer without live coding</h2>
+<p>After the demo, the instructor gives one new condition. Your answer should follow a four-part structure:</p>
+<ol>
+  <li><strong>What changes?</strong> Identify the part of the educational design or application that is affected.</li>
+  <li><strong>What stays fixed?</strong> Preserve the safety/data/tool boundaries unless the institution explicitly redesigns and revalidates them.</li>
+  <li><strong>What would you modify?</strong> Name the smallest plausible change.</li>
+  <li><strong>What must be retested?</strong> Explain which previous evidence becomes stale after the change.</li>
+</ol>
+<div class="grid">
+  <div class="card"><h3>Condition A — only 8 minutes</h3><p>Shorten the learning workflow; do not simply ask the model to produce more work for the learner. Revalidate timing and learner-first behaviour.</p></div>
+  <div class="card"><h3>Condition B — less experienced learners</h3><p>Increase scaffolding/focused questions while preserving an independent learner contribution. Retest T3-like authorship boundaries.</p></div>
+  <div class="card"><h3>Condition C — two approved sources</h3><p>The current one-material boundary is no longer sufficient. Source selection/tool logic and grounding tests would need redesign and validation.</p></div>
+  <div class="card"><h3>Condition D — no cloud provider</h3><p>Saved evidence can support explanation, but live inference is unavailable. A local inference route would need separate setup and validation before being treated as equivalent.</p></div>
+  <div class="card"><h3>Condition E — restricted material</h3><p>Do not put it into the current cloud workshop route. Data boundary, local/institutional infrastructure and approval requirements would need a separate design.</p></div>
+</div>
+
+<h3>Mini-check — what becomes stale?</h3>
+<div class="interaction self-check" data-self-check data-correct="retest" data-correct-feedback="Correct. Once agent behaviour/configuration changes, previous behavioural evidence no longer certifies the modified version." data-incorrect-feedback="Day 4 established the final-version rule: changed versions need new relevant evidence.">
+  <fieldset><legend>You substantially change the instruction for a new learner group. Can you still cite the old T1–T3 record as proof of the new version?</legend>
+    <label><input type="radio" name="d5-check-2" value="yes"> Yes, because it is the same project</label>
+    <label><input type="radio" name="d5-check-2" value="retest"> No; the changed behaviour must be retested</label>
+    <label><input type="radio" name="d5-check-2" value="model"> Yes, if the same model is used</label>
+  </fieldset>
+  <button class="control-button" type="button" data-self-check-submit>Check answer</button><p class="self-check-feedback" data-self-check-feedback></p>
+</div>
+
+<h2>5. Discussion — where is an agent actually the right tool?</h2>
+<div class="grid">
+  <div class="card"><h3>Good candidate</h3><p>A repeated educational workflow has a defined learner/instructor action, clear evidence sources, bounded tools and observable outputs.</p></div>
+  <div class="card"><h3>Maybe just use a chatbot</h3><p>The task is a one-off explanation or brainstorming conversation and no controlled external action/source workflow is needed.</p></div>
+  <div class="card"><h3>Maybe use static material</h3><p>The learner only needs a fixed explanation, checklist or reference and adaptive behaviour adds little value.</p></div>
+  <div class="card"><h3>Stop / redesign first</h3><p>The task would require sensitive data, poorly defined responsibility, unbounded external actions or a level of reliability not validated by the prototype.</p></div>
+</div>
+
+<h2>6. Whole-workshop synthesis</h2>
+<div class="page-sequence">
+  <div><strong>Day 1 — UNDERSTAND</strong><br>AI, LLMs, assistants, agents, tools, human control</div>
+  <div><strong>Day 2 — CREATE WITH AI</strong><br>controlled vibe coding + Git evidence/recovery</div>
+  <div><strong>Day 3 — BUILD AN AGENT</strong><br>pipeline, source/tool evidence, bounded instruction change</div>
+  <div><strong>Day 4 — TEST AN AGENT</strong><br>T1–T3, diagnosis, correction and regression rule</div>
+  <div><strong>Day 5 — EXPLAIN & TRANSFER</strong><br>demo, limits, new condition, feedback and next step</div>
+</div>
+<p>The common thread is <strong>human control over increasingly capable workflows</strong>: first understand, then change software safely, then build a bounded agent, then test it, then explain when the pattern should or should not be reused.</p>
+
+<h2>7. Feedback — make it actionable</h2>
+<p>Use the approved feedback route. Do not include API keys, project secrets, sensitive information or private execution logs.</p>
+<div class="card"><ol>
+  <li><strong>Value:</strong> Which part most improved your ability to understand or work with AI agents?</li>
+  <li><strong>Clarity:</strong> Which concept or task was least clear?</li>
+  <li><strong>Pacing:</strong> Which day needs more time? Which could be shorter?</li>
+  <li><strong>Technical friction:</strong> What blocker consumed the most time?</li>
+  <li><strong>Transfer:</strong> What educational-agent use case would you try next?</li>
+  <li><strong>Confidence:</strong> Which action can you now perform independently: run / change / inspect tool evidence / test / explain?</li>
+  <li><strong>Instructor improvement:</strong> What is the one change that would most improve the next delivery?</li>
+</ol></div>
+
+<h2>8. Choose one realistic next step</h2>
+<p>A next step should be small enough to validate. Choose one:</p>
+<div class="grid">
+  <div class="card"><h3>Refine this prototype</h3><p>Improve the same single-agent learning workflow using evidence from testing and feedback.</p></div>
+  <div class="card"><h3>Adapt the pattern</h3><p>Use the same bounded architecture for another public/synthetic educational case and create a new test set.</p></div>
+  <div class="card"><h3>Plan an institutional pilot</h3><p>Define approved data, infrastructure, responsibilities, support and acceptance evidence before real learner use.</p></div>
+  <div class="card"><h3>Stop deliberately</h3><p>Document why the use case does not justify an agent. Choosing not to automate can be a valid outcome.</p></div>
+</div>
+<p>Advanced RAG, multi-agent systems, MCP/A2A, broad tool access and production deployment remain outside the five-day pilot unless a later course/revision explicitly introduces them.</p>
+
+<h2>60-minute session map</h2>
+<div class="page-sequence"><div><strong>0–5</strong><br>Reopen final version + demo criteria</div><div><strong>5–35</strong><br>Participant demonstrations (adapt to cohort size)</div><div><strong>35–44</strong><br>New-condition transfer questions</div><div><strong>44–51</strong><br>Whole-group patterns, limits and “agent vs simpler tool” discussion</div><div><strong>51–55</strong><br>Five-day synthesis</div><div><strong>55–60</strong><br>Feedback + individual next step</div></div>
+<div class="notice"><strong>Cohort-size rule:</strong> about 3 minutes per participant plus transitions can exceed 60 minutes. Confirm the actual cohort size before delivery. If needed, use a pre-agreed subset, paired demos, or a separate support/demo block—do not silently delete the discussion and feedback objectives.</div>
+
+<h2>Final checkpoint</h2>
+<div class="grid">
+  <div class="card"><h3>Demonstration</h3><p>Educational problem → prototype → bounded change → real action evidence → final T1–T3 → limitation.</p></div>
+  <div class="card"><h3>Transfer</h3><p>You answered one new condition by stating what changes, what stays fixed and what must be retested.</p></div>
+  <div class="card"><h3>Feedback</h3><p>You gave actionable feedback through the approved route without sharing secrets/sensitive data.</p></div>
+  <div class="card"><h3>Next step</h3><p>You named one realistic continuation—or a deliberate stop—and the validation needed before real learner use.</p></div>
+</div>
+
+<div class="callout"><strong>Workshop outcome:</strong> you are not expected to become a software engineer. You should now be able to explain what an agentic educational application is, use AI to make controlled software changes, inspect a simple agent’s real action, change one bounded behaviour, test important boundaries, and communicate the prototype’s educational value and limitations.</div>
+</main><footer class="page-footer"><div class="footer-inner">Revision 6 · Day 5 · English · EXPLAIN, DISCUSS, TRANSFER</div></footer><script src="../js/site.js"></script></body></html>

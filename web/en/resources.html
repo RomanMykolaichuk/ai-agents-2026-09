@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Resources — AI Agents for Defence Education</title><link rel="stylesheet" href="../css/site.css"></head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../uk/resources.html" lang="uk">Українська</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Menu</button></div></div><nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Workshop"><ul><li><a href="index.html">Start</a></li><li><a href="day-1.html">Day 1</a></li><li><a href="day-2.html">Day 2</a></li><li><a href="day-3.html">Day 3</a></li><li><a href="day-4.html">Day 4</a></li><li><a href="day-5.html">Day 5</a></li><li><a href="recovery.html">Recovery</a></li><li><a aria-current="page" href="resources.html">Resources</a></li></ul></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Revision 6 · Resources</p><h1>Approved participant-facing references</h1><p class="lead">Use the workshop files first. External links below are official setup/reference pages and should be revalidated shortly before delivery.</p><span class="status">Participant references + glossary + support boundary</span></section>
+<div class="notice"><strong>Do not share secrets:</strong> never place Groq keys, <code>.env</code> contents, private repository tokens, private logs, workspace passwords, restricted material or admin/edit links in this site, ChatGPT, screenshots or feedback.</div>
+
+<h2>Workshop routes</h2>
+<div class="grid">
+  <div class="card"><h3>Day 2 dashboard</h3><p><code>dashboard/</code></p><p>Baseline: 8 learners, average attempts 1.75. Required changes: Completed learners = 6; follow-up = Learner 04 + Learner 07.</p></div>
+  <div class="card"><h3>Day 3–4 starter</h3><p><code>starter/</code></p><p>Prepared FastAPI runtime with one allow-listed <code>read_course_material</code> tool and local ignored <code>.env</code>.</p></div>
+  <div class="card"><h3>Recovery</h3><p><a href="recovery.html">Open the Recovery page</a> for executable Day 1–5 troubleshooting routes and status language.</p></div>
+  <div class="card"><h3>Formal tests</h3><p>T1–T3 are loaded from the starter UI on Day 4. Use the prepared buttons so stage/history are reset to the canonical test state.</p></div>
+</div>
+
+<h2>Official setup references</h2>
+<div class="grid">
+  <div class="card"><h3>Python</h3><p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener noreferrer">Python for Windows — official downloads</a></p><p>Workshop baseline: Python 3.12. Do not switch versions during delivery unless separately tested.</p></div>
+  <div class="card"><h3>Git</h3><p><a href="https://git-scm.com/download/win" target="_blank" rel="noopener noreferrer">Git for Windows — official download</a></p><p>Use the workshop’s exact Git commands rather than a general Git tutorial during the core session.</p></div>
+  <div class="card"><h3>VS Code</h3><p><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">Visual Studio Code — official download</a></p><p>The workshop does not require a special extension bundle.</p></div>
+  <div class="card"><h3>GitHub</h3><p><a href="https://docs.github.com/en/get-started" target="_blank" rel="noopener noreferrer">GitHub Docs — Get started</a></p><p>Repository access should be confirmed before Day 1 where possible.</p></div>
+  <div class="card"><h3>Groq</h3><p><a href="https://console.groq.com/docs/quickstart" target="_blank" rel="noopener noreferrer">Groq API Quickstart</a></p><p>Use only the local <code>.env</code> route documented by this workshop. Provider/model availability must be rechecked before delivery.</p></div>
+</div>
+
+<h2>Core glossary</h2>
+<div class="grid">
+  <div class="card"><h3>Model</h3><p>The language model that generates a response from supplied context. It is only one part of the agentic application.</p></div>
+  <div class="card"><h3>Agentic application</h3><p>An application that combines instructions/context, a model, approved actions/tools, observations, limits and human control.</p></div>
+  <div class="card"><h3>Tool</h3><p>A capability the application exposes to the model. In this workshop the core tool is read-only and allow-listed.</p></div>
+  <div class="card"><h3>Grounding</h3><p>Using an approved source for factual support instead of inventing unsupported evidence.</p></div>
+  <div class="card"><h3>Factual log</h3><p>Application evidence of what action/tool actually ran. Model prose saying “I used the source” is not equivalent evidence.</p></div>
+  <div class="card"><h3>Bounded change</h3><p>A deliberately small change with explicit scope, expected result, evidence and recovery path.</p></div>
+  <div class="card"><h3>Checkpoint</h3><p>A known-good version/state that can be identified and restored before later work.</p></div>
+  <div class="card"><h3>Technical error</h3><p>A runtime/provider failure. It must be recovered before scoring behavioural quality.</p></div>
+  <div class="card"><h3>Instructor required</h3><p>A state where the application intentionally stops because a configured boundary or schema requires human intervention.</p></div>
+  <div class="card"><h3>Human outcome</h3><p>Day 4 evidence label: <strong>PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL</strong>. It is separate from runtime status.</p></div>
+</div>
+
+<h2>Support and feedback route</h2>
+<div class="grid">
+  <div class="card"><h3>During the pilot</h3><p>Use the instructor and the optional up-to-30-minute post-session support period for unresolved setup/recovery blockers. Share only non-sensitive command/error state.</p></div>
+  <div class="card"><h3>Feedback</h3><p>The organiser-approved participant-facing feedback URL must be confirmed before final GO. Until then, no placeholder or private edit/admin URL is treated as an approved submission route.</p></div>
+</div>
+<div class="callout"><strong>Release rule:</strong> if an external link, provider model, feedback form or support route changes before delivery, update the delivery-specific evidence rather than silently assuming the old route still works.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · Resources · English</div></footer><script src="../js/site.js"></script>
+</body></html>

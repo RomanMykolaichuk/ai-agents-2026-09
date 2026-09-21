@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recovery — AI Agents for Defence Education</title><link rel="stylesheet" href="../css/site.css"></head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../uk/recovery.html" lang="uk">Українська</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Menu</button></div></div><nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Workshop"><ul><li><a href="index.html">Start</a></li><li><a href="day-1.html">Day 1</a></li><li><a href="day-2.html">Day 2</a></li><li><a href="day-3.html">Day 3</a></li><li><a href="day-4.html">Day 4</a></li><li><a href="day-5.html">Day 5</a></li><li><a aria-current="page" href="recovery.html">Recovery</a></li><li><a href="resources.html">Resources</a></li></ul></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Revision 6 · Recovery</p><h1>Recover the learning path, not just the software</h1><p class="lead">Use the smallest valid recovery action, preserve known-good states, and keep technical failure separate from behavioural failure.</p><span class="status">Red-team-remediated recovery routes</span></section>
+<div class="notice"><strong>Security boundary:</strong> never paste or display API keys, <code>.env</code> contents, private logs, restricted material or participant personal data while asking for help. An instructor demo may preserve discussion continuity, but it does not replace a participant’s required practical evidence.</div>
+
+<h2>First decision: what kind of failure is this?</h2>
+<div class="grid">
+  <div class="card"><h3>Setup / environment</h3><p>Python, Git, VS Code, folders, virtual environment or missing local files.</p></div>
+  <div class="card"><h3>Project / Git</h3><p>Wrong file changed, oversized AI patch, baseline lost, restore/reapply problem.</p></div>
+  <div class="card"><h3>Runtime / provider</h3><p>Uvicorn process, <code>.env</code>, network, Groq authentication/rate limit/model availability.</p></div>
+  <div class="card"><h3>Agent behaviour</h3><p>Grounding, unsupported claims, learner-first boundary or missing expected tool action after technical state is known-good.</p></div>
+</div>
+
+<h2>Day 1–2 recovery</h2>
+<div class="grid">
+  <div class="card"><h3>Wrong folder / command fails</h3><p>Return to repository root first:</p><pre><code>git rev-parse --show-toplevel</code></pre><p>Then follow the exact Day 2 path. Do not guess relative paths from an unknown folder.</p></div>
+  <div class="card"><h3>Dashboard opened with file://</h3><p>Stop using the double-clicked file. From <code>dashboard/</code>, run the local HTTP server bound to <code>127.0.0.1</code>, then open <code>http://127.0.0.1:8002/</code>.</p></div>
+  <div class="card"><h3>ChatGPT proposes a large refactor</h3><p>Reject it. Re-submit only the current dashboard files needed for the task and ask for the smallest vanilla HTML/JavaScript change. Do not upload repository archives or secrets.</p></div>
+  <div class="card"><h3>data.json was edited</h3><p>Restore <code>data.json</code> from Git before judging the feature. Expected Day 2 results must come from code reading the unchanged synthetic records.</p></div>
+</div>
+
+<h2>Day 2 Git recovery — canonical route</h2>
+<p>Run Git evidence from repository root. Before restore, save the accepted dashboard state outside the repository.</p>
+<pre><code>git diff -- dashboard &gt; ../aade-dashboard-accepted.patch
+git restore --staged --worktree -- dashboard
+# verify baseline in browser
+git apply ../aade-dashboard-accepted.patch
+# verify KPI = 6 and follow-up filter = Learner 04 + Learner 07</code></pre>
+<div class="callout"><strong>If patch apply fails:</strong> stop. Do not stack random fixes. Confirm you are at repository root, confirm the dashboard is back at the expected baseline, then ask the instructor to inspect the patch and working-tree state. Move this recovery to optional support time if it threatens the 60-minute core session.</div>
+
+<h2>Starter first setup vs restart</h2>
+<div class="grid">
+  <div class="card"><h3>.env missing</h3><p>Create it from <code>.env.example</code> only when it does not already exist, edit it locally, then confirm <code>git check-ignore -v .env</code>.</p></div>
+  <div class="card"><h3>.env already exists</h3><p>Do not copy <code>.env.example</code> over it. Restart the configured starter without overwriting credentials.</p></div>
+  <div class="card"><h3>Invalid key</h3><p>A health page showing “key present” does not validate the credential. A real provider request must succeed. Correct the local <code>.env</code> and restart; never paste the key into support chat.</p></div>
+  <div class="card"><h3>Groq rate limit / unavailable model</h3><p>Classify as <strong>BLOCKED: TECHNICAL</strong>. Use the provider message to decide when to retry or whether the instructor must switch to a separately validated model. Do not silently change models mid-test.</p></div>
+</div>
+
+<h2>Day 3 runtime recovery</h2>
+<div class="grid">
+  <div class="card"><h3>Port 8001 / old Uvicorn process</h3><p>Stop the old process in the terminal that launched it. Restart from <code>starter/</code> with the documented <code>--env-file .env</code> command, then hard-refresh the browser.</p></div>
+  <div class="card"><h3>activity.json change not visible</h3><p>Check the repository-root diff first. If the file changed but the UI still shows old text, treat this as stale process state: restart Uvicorn, then reload.</p></div>
+  <div class="card"><h3>No tool call in grounded run</h3><p>Reset to the prepared Day 3 request, <code>stage=revision</code>, <code>history=0</code>. Confirm the request asks for learning-card evidence and the approved material ID is unchanged. Do not add another tool as a shortcut.</p></div>
+  <div class="card"><h3>Empty/technical provider response</h3><p>Record <strong>Technical error</strong>. Do not score the behaviour until the technical condition is recovered and the same canonical request is rerun.</p></div>
+</div>
+
+<h2>Day 4 testing recovery</h2>
+<div class="grid">
+  <div class="card"><h3>T1 not grounded</h3><p>First confirm canonical context: <code>revision</code>, history 0, correct source/tool, no stale process. Only then diagnose the instruction.</p></div>
+  <div class="card"><h3>T2 invents evidence</h3><p>Record <strong>FAIL</strong>, identify the smallest behavioural correction, keep tool/source boundaries unchanged, restart if needed, then rerun the full T1–T3 set.</p></div>
+  <div class="card"><h3>T3 writes the submission</h3><p>Confirm <code>first_attempt</code>, history 0. If the learner-first guard still fails, record <strong>FAIL</strong>, correct the smallest justified boundary/instruction defect, then rerun all T1–T3.</p></div>
+  <div class="card"><h3>Provider/network failure during T1–T3</h3><p>Use <strong>BLOCKED: TECHNICAL</strong>, not behavioural FAIL. Recover technical conditions and rerun the affected canonical test; if code/config changed, apply the full regression rule.</p></div>
+</div>
+
+<h2>Day 5 and internet-loss recovery</h2>
+<div class="grid">
+  <div class="card"><h3>Participant changed code after Day 4</h3><p>Do not present old evidence as final-version evidence. Either rerun T1–T3 before the demo or present honestly as <strong>BLOCKED / evidence stale</strong>.</p></div>
+  <div class="card"><h3>Internet/provider unavailable</h3><p>Use saved screenshots/text evidence only for discussion if they contain no secrets or private data. State clearly that no live inference was verified. A local provider route counts only if it was separately prepared and validated before the session.</p></div>
+  <div class="card"><h3>Participant cannot finish inside 60 min</h3><p>Record the exact blocker and move recovery to the optional 30-minute support period. Do not remove the day’s core learning objective just to hide the timing problem.</p></div>
+  <div class="card"><h3>Need instructor help</h3><p>Share the command, error text and non-sensitive state only. Never share the secret value. The instructor should diagnose environment → process → provider → behaviour in that order.</p></div>
+</div>
+
+<h2>Recovery status language</h2>
+<p>Use explicit language instead of pretending a technical problem is a learning failure:</p>
+<pre><code>READY
+BLOCKED: &lt;specific reason&gt;
+Recovery action: &lt;next step&gt;
+Owner/support needed: &lt;who/when&gt;
+
+Day 4 human outcomes:
+PASS
+FAIL
+NEEDS REVIEW
+BLOCKED: TECHNICAL</code></pre>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · Recovery · English</div></footer><script src="../js/site.js"></script>
+</body></html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>День 2 — Vibe Coding та основи вебпроєкту</title>
+  <link rel="stylesheet" href="../css/site.css">
+  <style>body.rt-canonical-practice-page .practice-deck:not(.canonical-practice){display:none}</style>
+</head>
+<body class="rt-canonical-practice-page">
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
+<header class="site-header">
+  <div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../en/day-2.html" lang="en">English</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Меню</button></div></div>
+  <nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Навігація воркшопу"><ul><li><a href="index.html">Початок</a></li><li><a href="day-1.html">День 1</a></li><li><a aria-current="page" href="day-2.html">День 2</a></li><li><a href="day-3.html">День 3</a></li><li><a href="day-4.html">День 4</a></li><li><a href="day-5.html">День 5</a></li><li><a href="recovery.html">Відновлення</a></li><li><a href="resources.html">Ресурси</a></li></ul></nav>
+</header>
+<main id="main">
+<section class="hero"><p class="eyebrow">День 2 · 60 хвилин · CREATE WITH AI</p><h1>Vibe Coding та основи вебпроєкту</h1><p class="lead">Використайте ChatGPT Plus як керованого помічника з кодування для невеликого dashboard на синтетичних даних. Зробіть дві обмежені зміни, перевірте реальний Git diff, доведіть можливість відновлення та підготуйте окремий educational-agent starter до Дня 3.</p><span class="status">Канонічний маршрут учасника · RT-FIX-1</span></section>
+
+<div class="notice"><strong>Межа Дня 2:</strong> dashboard навмисно не є агентом. Сьогодні ви відпрацьовуєте контрольований software-change workflow. Створення educational agent починається у День 3; формальні T1–T3 належать Дню 4.</div>
+
+<h2>1. Канонічний маршрут учасника</h2>
+<div class="grid">
+  <div class="card"><h3>Де я працюю?</h3><p>Використовуйте два термінали. <strong>Terminal A</strong> запускає dashboard server із папки <code>dashboard/</code>. <strong>Terminal B</strong> повертається в корінь репозиторію для Git evidence та recovery.</p></div>
+  <div class="card"><h3>Що запускати?</h3><p>Використовуйте точні command blocks на цій сторінці. Не вгадуйте relative paths і не запускайте Git recovery з невідомої папки.</p></div>
+  <div class="card"><h3>Що має бути видно?</h3><p>Baseline: 8 learners, average attempts 1.75, без Completed learners KPI і без follow-up filter. Фінальна practice version: KPI = 6 та follow-up rows = Learner 04 + Learner 07.</p></div>
+  <div class="card"><h3>Що робити при помилці?</h3><p>Спершу визначте рівень проблеми: folder/path, local HTTP server, browser result, Git state або Day 3 starter setup. Не компенсуйте помилку зміною synthetic data чи додаванням нового framework.</p></div>
+</div>
+
+<h2>2. Прочитайте чотири файли проєкту</h2>
+<div class="grid">
+  <div class="card"><h3><code>index.html</code> = структура</h3><p>Видимі елементи сторінки: headings, KPI cards, table і controls.</p></div>
+  <div class="card"><h3><code>style.css</code> = оформлення</h3><p>Spacing, typography, layout і responsive appearance.</p></div>
+  <div class="card"><h3><code>app.js</code> = поведінка</h3><p>Завантажує JSON, обчислює metrics, фільтрує та формує rows.</p></div>
+  <div class="card"><h3><code>data.json</code> = дані</h3><p>Вісім вигаданих learner records. Їх треба читати, а не змінювати, щоб примусово отримати expected answer.</p></div>
+</div>
+
+<h2>3. Спочатку запустіть baseline</h2>
+<p>Відкрийте terminal усередині repository. Використайте один із точних маршрутів нижче.</p>
+<div class="card"><h3>Windows PowerShell — Terminal A</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+Set-Location workshops\ai-agents-defence-education\dashboard
+py -3.12 -m http.server 8002 --bind 127.0.0.1</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux — Terminal A</h3><pre><code>cd "$(git rev-parse --show-toplevel)/dashboard"
+python3 -m http.server 8002 --bind 127.0.0.1</code></pre></div>
+<p>Відкрийте <code>http://127.0.0.1:8002/</code>. Baseline PASS, якщо видно <strong>Total learners = 8</strong>, <strong>Average attempts = 1.75</strong>, вісім rows, status <strong>Loaded</strong>, а participant-created KPI/filter ще відсутні.</p>
+<div class="notice"><strong>Якщо data не завантажується:</strong> не відкривайте сторінку через <code>file://</code>. Залиште local HTTP server запущеним і перезавантажте <code>http://127.0.0.1:8002/</code>.</div>
+
+<h2>4. Передайте ChatGPT реальний контекст проєкту</h2>
+<p>ChatGPT не бачить файлів на вашому ноутбуці, доки ви їх не надасте. Для цієї вправи attach або paste тільки поточні:</p>
+<ul><li><code>index.html</code></li><li><code>style.css</code></li><li><code>app.js</code></li><li><code>data.json</code></li></ul>
+<div class="notice"><strong>Не передавайте:</strong> <code>.env</code>, API keys, ZIP repository, private logs, screenshots із secrets або unrelated files. Якщо потрібні current files не надані, ChatGPT має попросити їх, а не вигадувати структуру проєкту.</div>
+
+<h2>5. Iteration A — Completed learners</h2>
+<p>Додайте один derived KPI <strong>Completed learners</strong>. Значення має обчислюватися з <code>learner.completed</code>. Очікуваний результат: <strong>6</strong>.</p>
+<ol>
+  <li>Надайте ChatGPT чотири current dashboard files.</li>
+  <li>Використайте canonical Iteration A prompt нижче.</li>
+  <li>Попросіть спочатку назвати files, які пропонується змінити, і лише потім показувати code.</li>
+  <li>Відхиляйте hard-coding, changes to <code>data.json</code>, framework migration, backend/database/package/library additions і unrelated refactoring.</li>
+  <li>Вручну застосуйте тільки accepted minimal change у VS Code.</li>
+  <li>Refresh і перевірте <strong>Completed learners = 6</strong>.</li>
+</ol>
+
+<h2>6. Iteration B — Needs follow-up filter</h2>
+<p>Надайте ChatGPT <strong>current post-Iteration-A versions</strong> файлів, які змінилися. Додайте control <strong>Show learners needing follow-up</strong>. Criterion: <code>completed === false</code>. Очікувані rows: <strong>Learner 04</strong> і <strong>Learner 07</strong>. Має бути можливість повернутися до всіх восьми learners.</p>
+<ol>
+  <li>Використайте canonical Iteration B prompt нижче.</li>
+  <li>Очікуйте мінімальний scope: один visible control у <code>index.html</code> + невелике розширення render/filter logic у <code>app.js</code>.</li>
+  <li>Перевірте default view = 8 rows.</li>
+  <li>Увімкніть filter і перевірте рівно Learner 04 + Learner 07.</li>
+  <li>Поверніться до all learners і знову перевірте 8 rows.</li>
+</ol>
+
+<h2>7. Evidence і recovery — завжди з кореня repository</h2>
+<p>Залиште Terminal A запущеним. Відкрийте <strong>Terminal B</strong> усередині repository та спочатку поверніться в repository root. Потім inspect, save, restore і reapply accepted change.</p>
+<div class="card"><h3>Windows PowerShell — Terminal B</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+git status --short
+git diff -- dashboard
+git diff --output="$env:TEMP\day2-dashboard.patch" -- dashboard
+Test-Path "$env:TEMP\day2-dashboard.patch"
+git restore --staged --worktree -- dashboard
+git status --short
+git apply "$env:TEMP\day2-dashboard.patch"
+git diff -- dashboard</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux — Terminal B</h3><pre><code>cd "$(git rev-parse --show-toplevel)"
+git status --short
+git diff -- dashboard
+git diff --output=/tmp/day2-dashboard.patch -- dashboard
+test -s /tmp/day2-dashboard.patch && echo "patch saved"
+git restore --staged --worktree -- dashboard
+git status --short
+git apply /tmp/day2-dashboard.patch
+git diff -- dashboard</code></pre></div>
+<p>Після <code>git restore</code> refresh browser і підтвердьте повернення baseline. Після <code>git apply</code> refresh ще раз і підтвердьте KPI = 6 та follow-up filter = 2. Saved patch є recovery source для цієї вправи — відновлювати accepted changes з пам’яті не потрібно.</p>
+
+<h2>8. Підготуйте starter до Дня 3</h2>
+<p>Поверніться в repository root, перейдіть у <code>starter/</code>, підготуйте Python environment і створіть <code>.env</code> лише якщо він ще не існує.</p>
+<div class="card"><h3>Windows PowerShell</h3><pre><code>Set-Location (git rev-parse --show-toplevel)
+Set-Location workshops\ai-agents-defence-education\starter
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe verify.py
+if (-not (Test-Path .env)) { Copy-Item .env.example .env } else { Write-Host ".env exists; not overwritten" }
+git check-ignore -v .env</code></pre></div>
+<div class="card"><h3>Ubuntu/Linux</h3><pre><code>cd "$(git rev-parse --show-toplevel)/starter"
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python verify.py
+[ -f .env ] || cp .env.example .env
+git check-ignore -v .env</code></pre></div>
+<p>Редагуйте local <code>.env</code> у VS Code і додайте власний Groq key тільки туди. Ніколи не вставляйте key у ChatGPT, workbook, screenshots чи shared chat. Якщо є час, запустіть Uvicorn і перевірте <code>/api/health</code>; це перевіряє local application health, а не credential validity і не є Day 3 agent evidence.</p>
+
+<section class="practice-deck canonical-practice" aria-label="Канонічні інструменти Дня 2">
+  <h2 class="practice-deck-title">Канонічні інструменти практики</h2>
+  <article class="template-card"><div class="template-card-header"><h3>Iteration A prompt</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d2-a-uk">I am providing the current index.html, style.css, app.js and data.json from a small vanilla dashboard. First tell me which existing files should change and why. Then propose the smallest useful change that adds a KPI named "Completed learners" calculated from learner.completed. Do not hard-code 6. Do not change data.json. Do not add frameworks, packages, a backend, database, chart library or unrelated refactoring. If the current files are not available to you, ask me to provide them instead of inventing their structure.</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d2-a-uk">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+  <article class="template-card"><div class="template-card-header"><h3>Iteration B prompt</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d2-b-uk">I am now providing the current post-Iteration-A files. Add one control labelled "Show learners needing follow-up". Reuse the existing learner data and rendering logic. When active, show only learners where completed is false; allow returning to all learners. Keep the smallest vanilla HTML/JavaScript change. Do not modify data.json, add frameworks/packages/backend/database/libraries, or refactor unrelated code. First tell me which files should change and why.</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d2-b-uk">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+  <article class="template-card"><div class="template-card-header"><h3>Day 2 evidence note</h3></div><div class="command-row"><pre class="command-box"><code id="rt-d2-evidence-uk">Baseline: 8 learners / average attempts 1.75 / no participant features
+Iteration A: PASS / BLOCKED
+Completed learners value:
+Iteration B: PASS / BLOCKED
+Follow-up rows:
+Files changed:
+One AI proposal I rejected and why:
+What git diff proved:
+Recovery patch saved: YES / NO
+Restore to baseline confirmed: YES / NO
+Reapply confirmed: YES / NO
+starter verify.py: PASS / BLOCKED
+.env ignored by Git: YES / NO
+Recovery action if blocked:</code></pre><button class="control-button" type="button" data-copy-button data-copy-target="#rt-d2-evidence-uk">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div></article>
+</section>
+
+<h2>9. Що означає завершення Дня 2?</h2>
+<div class="grid">
+  <div class="card"><h3>Software-change evidence</h3><p>Baseline працює; Iteration A показує 6; Iteration B показує Learner 04 + Learner 07 і повертається до всіх 8.</p></div>
+  <div class="card"><h3>Review evidence</h3><p>Ви можете пояснити, які files змінилися, і назвати хоча б одну AI proposal, яку відхилили через scope/correctness.</p></div>
+  <div class="card"><h3>Recovery evidence</h3><p>Ви переглянули diff із repository root, зберегли accepted patch, restore baseline, а потім reapply і reverify accepted version.</p></div>
+  <div class="card"><h3>Готовність до Дня 3</h3><p><code>verify.py</code> PASS або є точний blocker; local <code>.env</code> не перезаписано та ignored by Git.</p></div>
+</div>
+
+<h2>Карта 60-хвилинного заняття</h2>
+<div class="page-sequence"><div><strong>0–7</strong><br>Controlled vibe-coding loop + four-file map</div><div><strong>7–14</strong><br>Baseline + ChatGPT file handoff</div><div><strong>14–27</strong><br>Iteration A</div><div><strong>27–38</strong><br>Iteration B</div><div><strong>38–48</strong><br>Diff + saved patch + restore + reapply</div><div><strong>48–57</strong><br>Starter preparation</div><div><strong>57–60</strong><br>Evidence note + Day 3 handoff</div></div>
+
+<div class="callout"><strong>Далі:</strong> День 3 залишає dashboard. Ви запустите підготовлений starter, розберете real agent pipeline, побачите реальний <code>read_course_material</code> action і зробите одну bounded instruction change.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · День 2 · Українська · RT-FIX-1</div></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>

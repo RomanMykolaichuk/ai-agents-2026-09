@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>День 1 — Основи ШІ та ШІ-агентів</title>
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
+<header class="site-header">
+  <div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../en/day-1.html" lang="en">English</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Меню</button></div></div>
+  <nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Навігація воркшопу"><ul><li><a href="index.html">Початок</a></li><li><a aria-current="page" href="day-1.html">День 1</a></li><li><a href="day-2.html">День 2</a></li><li><a href="day-3.html">День 3</a></li><li><a href="day-4.html">День 4</a></li><li><a href="day-5.html">День 5</a></li><li><a href="recovery.html">Відновлення</a></li><li><a href="resources.html">Ресурси</a></li></ul></nav>
+</header>
+<main id="main">
+  <section class="hero"><p class="eyebrow">День 1 · 60 хвилин · ЗРОЗУМІТИ</p><h1>Основи ШІ та ШІ-агентів</h1><p class="lead">Сформувати практичну модель штучного інтелекту, генеративного ШІ, великих мовних моделей, асистентів та агентів, а потім перевірити готовність програмного середовища й облікових записів до практичної роботи з Дня 2.</p><span class="status">Лекційне спрямування + readiness practical</span></section>
+
+  <div class="notice"><strong>Межа Дня 1:</strong> сьогодні учасники не створюють освітнього агента, не виконують повний аналіз learning-card case і не запускають T1–T3. Викладач може показати коротку демонстрацію агента, але participant agent construction починається на День 3.</div>
+
+  <h2>Що потрібно вміти пояснити наприкінці дня</h2>
+  <div class="grid">
+    <div class="card"><h3>Ландшафт ШІ</h3><p>Як співвідносяться AI, machine learning, generative AI та LLM і чому це не одне й те саме.</p></div>
+    <div class="card"><h3>Assistant vs agent</h3><p>Чому сама лише якісна розмова з моделлю ще не робить систему агентом.</p></div>
+    <div class="card"><h3>Agent loop</h3><p>Як instruction, context, model, approved tool, observation, limits і human control працюють разом.</p></div>
+    <div class="card"><h3>Готовність</h3><p>Чи готові комп’ютер та облікові записи до практики або який саме blocker залишився.</p></div>
+  </div>
+
+  <h2>Карта 60-хвилинного заняття</h2>
+  <div class="page-sequence">
+    <div><strong>0–5</strong><br>Карта воркшопу + стартове питання</div>
+    <div><strong>5–15</strong><br>AI → ML → Generative AI → LLM</div>
+    <div><strong>15–27</strong><br>Model, chatbot, assistant, agent</div>
+    <div><strong>27–39</strong><br>Agent anatomy, loop, tools, context</div>
+    <div><strong>39–47</strong><br>Освітні приклади + demo викладача + boundaries</div>
+    <div><strong>47–58</strong><br>Software/account readiness</div>
+    <div><strong>58–60</strong><br>READY / BLOCKED + перехід до Дня 2</div>
+  </div>
+
+  <h2>1. Почнемо з одного питання: що змінюється, коли ШІ може діяти?</h2>
+  <p>Мовна модель може генерувати текст. Корисне agentic application додає навколо моделі мету, bounded context, дозволені tools або actions, limits, evidence про те, що реально відбулося, і точку, де людська відповідальність залишається явною.</p>
+  <div class="grid">
+    <div class="card"><h3>Generate</h3><p>«Поясни це поняття». Модель генерує текст на основі prompt і context.</p></div>
+    <div class="card"><h3>Recommend</h3><p>«Порадь, яке джерело варто переглянути». Система пропонує дію, але не виконує її.</p></div>
+    <div class="card"><h3>Act through a tool</h3><p>«Прочитай дозволену learning card і використай її для короткої підказки». Application може виконати allow-listed read-only tool і повернути result моделі.</p></div>
+  </div>
+  <div class="callout"><strong>Стартове питання:</strong> який із трьох прикладів потребує від application чогось більшого, ніж генерація тексту? Які нові ризики з’являються, коли software може діяти?</div>
+
+  <h2>2. Від ШІ до великої мовної моделі</h2>
+  <div class="grid">
+    <div class="card"><h3>Artificial intelligence</h3><p>Широка категорія систем для задач, пов’язаних зі сприйняттям, прогнозуванням, мовою, міркуванням або вибором дій.</p></div>
+    <div class="card"><h3>Machine learning</h3><p>Поширений спосіб створення AI systems через навчання закономірностей на даних замість явного програмування кожного правила.</p></div>
+    <div class="card"><h3>Generative AI</h3><p>Моделі, що створюють новий контент — текст, код, зображення або аудіо — на основі статистичних закономірностей і поточного input.</p></div>
+    <div class="card"><h3>Large language model</h3><p>Генеративна модель, спеціалізована на мові та пов’язаних представленнях. Вона генерує імовірні продовження з context, але сама по собі не є source of truth, workflow чи авторизованим actor.</p></div>
+  </div>
+
+  <h3>Чому корисна відповідь усе одно може бути неправильною</h3>
+  <p>LLM оптимізована для створення правдоподібного output, а не для гарантування, що кожне твердження підтверджене approved source. В освіті це важливо: добре написане пояснення все одно може містити unsupported fact, вигадане citation або надмірно впевнений висновок.</p>
+  <div class="page-sequence">
+    <div><strong>Prompt</strong><br>Що запитує користувач</div>
+    <div><strong>Context</strong><br>Яка інформація доступна в цьому turn</div>
+    <div><strong>Generation</strong><br>Модель генерує корисну відповідь</div>
+    <div><strong>Verification</strong><br>Application або людина перевіряє evidence і boundaries</div>
+  </div>
+
+  <div class="interaction self-check" data-self-check data-correct="b" data-correct-feedback="Модель може згенерувати переконливу відповідь без перевірки за approved source." data-incorrect-feedback="Fluency не дорівнює verification.">
+    <h3>Мініперевірка 1</h3>
+    <fieldset><legend>Яке припущення про відповідь LLM є найбезпечнішим?</legend>
+      <label><input type="radio" name="d1-q1" value="a"> Якщо відповідь звучить упевнено, вона, скоріше за все, перевірена.</label>
+      <label><input type="radio" name="d1-q1" value="b"> Вона може бути корисною, але важливі твердження все одно потребують evidence або verification.</label>
+      <label><input type="radio" name="d1-q1" value="c"> Вона корисна лише тоді, коли модель підключена до Інтернету.</label>
+    </fieldset>
+    <button class="control-button" type="button" data-self-check-submit>Перевірити відповідь</button><p class="self-check-feedback" data-self-check-feedback aria-live="polite"></p>
+  </div>
+
+  <h2>3. Model, chatbot, assistant та agent — це різні рівні</h2>
+  <div class="grid">
+    <div class="card"><h3>Model</h3><p>Inference engine. Перетворює input context на output.</p></div>
+    <div class="card"><h3>Chatbot</h3><p>Розмовний interface навколо моделі. Керує messages і показує responses.</p></div>
+    <div class="card"><h3>Assistant</h3><p>Продукт, який допомагає користувачу виконувати tasks, часто з files, context, browsing або іншими capabilities. У цьому воркшопі ChatGPT Plus використовується як browser-based explanation і coding assistant.</p></div>
+    <div class="card"><h3>Agentic application</h3><p>Application задає моделі явну role і boundaries, дозволяє запитувати approved actions/tools, спостерігає results і продовжує controlled workflow.</p></div>
+  </div>
+
+  <h3>Практичний тест: «Чи може система щось зробити?»</h3>
+  <p>Якщо система лише генерує текст, називати її «agent» може бути малоінформативно. Різниця стає корисною, коли application може обрати дозволену action, виконати її за правилами, отримати result і продовжити або зупинитися.</p>
+  <div class="grid">
+    <div class="card"><h3>Цього недостатньо</h3><p>Role prompt, довга відповідь, personality, ланцюжок повідомлень або слово «agent» в interface.</p></div>
+    <div class="card"><h3>Agentic signal</h3><p>Controlled action selection, tool execution, observation of results, explicit limits і traceable evidence.</p></div>
+    <div class="card"><h3>Автономність не є самоціллю</h3><p>Більша autonomy не означає автоматично кращий результат. В освіті вузький та inspectable agent часто легше обґрунтувати, ніж високоавтономний.</p></div>
+  </div>
+
+  <h2>4. Мінімальна анатомія освітнього агента</h2>
+  <div class="page-sequence">
+    <div><strong>1 · Goal / instruction</strong><br>Що agent має право та повинен підтримувати</div>
+    <div><strong>2 · User request</strong><br>Learner або instructor просить допомогу</div>
+    <div><strong>3 · Context</strong><br>Поточна задача, bounded history і дозволена інформація</div>
+    <div><strong>4 · Model</strong><br>Інтерпретує request і обирає next step</div>
+    <div><strong>5 · Tool / action</strong><br>Необов’язкова approved operation</div>
+    <div><strong>6 · Observation</strong><br>Application отримує tool result</div>
+    <div><strong>7 · Response / stop</strong><br>Модель відповідає або workflow завершується</div>
+    <div><strong>8 · Human control</strong><br>Review, intervention і відповідальність залишаються явними</div>
+  </div>
+
+  <h3>Agent loop</h3>
+  <div class="callout"><strong>Think → Act → Observe → Continue or Stop.</strong> Цей loop корисний лише тоді, коли кожна action обмежена. У workshop starter модель може запросити один approved read-only tool, application виконує його, записує factual evidence і повертає result моделі.</div>
+
+  <h3>Tools — це capabilities, а не магія</h3>
+  <p>Tool — це операція, яку application відкриває моделі. Вона може бути вузькою, наприклад «прочитати одну approved learning card», або значно потужнішою: змінити calendar, надіслати message чи оновити database. Ризик змінюється разом із capability.</p>
+  <div class="grid">
+    <div class="card"><h3>Read-only tool</h3><p>Нижчий operational impact. Приклад: отримати один approved course material за fixed identifier.</p></div>
+    <div class="card"><h3>Write/action tool</h3><p>Вищий impact. Приклад: щось надіслати, змінити, опублікувати або видалити. Такі actions зазвичай потребують сильніших permissions і approval.</p></div>
+    <div class="card"><h3>Tool boundary</h3><p>Модель не повинна отримувати arbitrary file, URL або system access лише тому, що вона це попросила.</p></div>
+  </div>
+
+  <h3>Context — не те саме, що long-term memory</h3>
+  <p><strong>Context</strong> — інформація, доступна для поточного reasoning step: user request, bounded history, instructions і tool results. <strong>Memory</strong> — необов’язковий application mechanism, який зберігає інформацію між interactions. Workshop starter використовує bounded context; persistent learner memory для нього не потрібна.</p>
+
+  <h3>Рівні автономності</h3>
+  <div class="page-sequence">
+    <div><strong>Level 0</strong><br>Лише generate</div>
+    <div><strong>Level 1</strong><br>Suggest action; виконує людина</div>
+    <div><strong>Level 2</strong><br>Approved read-only tool</div>
+    <div><strong>Level 3</strong><br>Prepare/request higher-impact action з human approval</div>
+    <div><strong>Higher autonomy</strong><br>Поза межами цього pilot</div>
+  </div>
+  <p>Воркшоп навмисно залишається ближче до нижньої частини цієї шкали. Мета — зрозуміти механізм і контролювати його, а не максимізувати autonomy.</p>
+
+  <div class="interaction self-check" data-self-check data-correct="c" data-correct-feedback="Workshop agent корисний тим, що application обмежує дозволені дії та фіксує реальне виконання tool." data-incorrect-feedback="Ключове — bounded action + evidence, а не максимальна autonomy.">
+    <h3>Мініперевірка 2</h3>
+    <fieldset><legend>Який design найкраще відповідає цьому воркшопу?</legend>
+      <label><input type="radio" name="d1-q2" value="a"> Дати моделі unrestricted computer access, щоб вона могла вирішувати будь-що.</label>
+      <label><input type="radio" name="d1-q2" value="b"> Використати chatbot і назвати його agent через role prompt.</label>
+      <label><input type="radio" name="d1-q2" value="c"> Дати application один approved read-only tool, explicit limits і factual execution log.</label>
+    </fieldset>
+    <button class="control-button" type="button" data-self-check-submit>Перевірити відповідь</button><p class="self-check-feedback" data-self-check-feedback aria-live="polite"></p>
+  </div>
+
+  <h2>5. Де агенти можуть допомогти у військовій освіті</h2>
+  <p>Наведені приклади є освітніми та адміністративними. Вони не потребують реальних operational data чи autonomous military decision-making.</p>
+  <div class="grid">
+    <div class="card"><h3>Guided learner support</h3><p>Learner спочатку пише власну спробу. Agent читає один approved learning source і дає коротку підказку, не замінюючи роботу слухача.</p></div>
+    <div class="card"><h3>Instructor preparation</h3><p>Agent може підготувати draft activity plan з approved course material, а instructor перевіряє pedagogy і final content.</p></div>
+    <div class="card"><h3>Evidence-bound Q&amp;A</h3><p>Agent відповідає лише з визначеного набору public або approved training materials і прямо повідомляє, якщо source недостатньо.</p></div>
+    <div class="card"><h3>Course workflow support</h3><p>Agent може допомагати структурувати routine non-sensitive tasks, наприклад перевірку submission за explicit checklist, залишаючи final judgement викладачу.</p></div>
+  </div>
+
+  <h3>Коротка демонстрація лише викладачем</h3>
+  <ol>
+    <li>Показати підготовлений Day 3 starter на instructor machine.</li>
+    <li>Надіслати один grounded request, для якого потрібна approved learning card.</li>
+    <li>Показати різницю між текстом model і factual execution log.</li>
+    <li>Показати call <code>read_course_material</code> і fixed material identifier.</li>
+    <li>Зупинитися. Не перетворювати Day 1 на participant agent setup або testing.</li>
+  </ol>
+  <div class="callout"><strong>Що мають помітити учасники:</strong> головна зміна не в тому, що «AI звучить розумніше». Application має контрольовану capability, evidence її використання та явну boundary.</div>
+
+  <h2>6. Human control — це частина architecture</h2>
+  <div class="grid">
+    <div class="card"><h3>Before</h3><p>Визначити purpose, allowed data, tools, limits і success criteria.</p></div>
+    <div class="card"><h3>During</h3><p>Зберігати actions inspectable, обмежувати permissions, показувати failures і мати stop/recovery path.</p></div>
+    <div class="card"><h3>After</h3><p>Перевіряти outputs і logs, тестувати expected failure modes і вирішувати, чи прийнятна system для intended context.</p></div>
+  </div>
+
+  <h3>Безпека і межа даних</h3>
+  <div class="notice"><strong>Використовуйте лише public, synthetic або іншим чином approved material.</strong> Не вводьте classified/sensitive information, credentials, API keys, private logs або персональні дані учасників у ChatGPT, learning site, screenshots чи shared support channels.</div>
+  <p>Перед використанням будь-якого AI service поставте чотири питання: <strong>Які дані залишають мій device? Куди вони потрапляють? Що application може зробити? Хто залишається відповідальним?</strong></p>
+
+  <h2>7. Практичне завдання — готовність ПЗ та облікових записів</h2>
+  <p>Практична мета навмисно обмежена: зробити так, щоб Day 2 почався без затримки. Agent runtime сьогодні ще не налаштовуємо й не тестуємо.</p>
+
+  <div class="interaction-stack">
+    <div class="interaction"><h3>Перевірити Python</h3><div class="command-row"><pre class="command-box" id="d1-python">python --version</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-python">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Очікується:</strong> Python 3.12.x для primary participant baseline. Якщо встановлено іншу версію, її потрібно зафіксувати, а не приховувати різницю.</div></div>
+    <div class="interaction"><h3>Перевірити Git</h3><div class="command-row"><pre class="command-box" id="d1-git">git --version</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-git">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Очікується:</strong> version string Git без command-not-found error.</div></div>
+    <div class="interaction"><h3>Перевірити VS Code</h3><div class="command-row"><pre class="command-box" id="d1-code">code --version</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-code">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Очікується:</strong> version string VS Code. Якщо command <code>code</code> недоступна, але VS Code відкривається нормально, зафіксуйте це як конкретну environment difference.</div></div>
+    <div class="interaction"><h3>Перевірити стан repository</h3><div class="command-row"><pre class="command-box" id="d1-repo">git status --short</pre><button class="control-button" type="button" data-copy-button data-copy-target="#d1-repo">Копіювати</button><span class="inline-status" data-copy-status aria-live="polite"></span></div><div class="expected-result"><strong>Очікується:</strong> authorised workshop repository доступний локально, видно <code>dashboard/</code> і <code>starter/</code>.</div></div>
+  </div>
+
+  <h3>Перевірка account/access</h3>
+  <ol>
+    <li>Підтвердити sign-in до ChatGPT Plus, GitHub і Groq. Не вставляти API keys у цей сайт або ChatGPT.</li>
+    <li>Переконатися, що authorised workshop repository відкривається у VS Code.</li>
+    <li>Знайти <code>dashboard/</code> для Day 2 і <code>starter/</code> для Days 3–4. Сьогодні їх не змінювати.</li>
+    <li>Зафіксувати фінальний стан як <strong>READY</strong> або <strong>BLOCKED: &lt;конкретна причина&gt;</strong> із next recovery action.</li>
+  </ol>
+
+  <h3>Що означає READY?</h3>
+  <div class="grid">
+    <div class="card"><h3>Software</h3><p>Python, Git і VS Code встановлені та працюють.</p></div>
+    <div class="card"><h3>Access</h3><p>Є доступ до ChatGPT Plus, authorised GitHub repository і Groq account.</p></div>
+    <div class="card"><h3>Project visibility</h3><p>Repository відкривається, видно Day 2 dashboard і Day 3–4 starter.</p></div>
+    <div class="card"><h3>Known blocker</h3><p>Якщо щось не працює, записані точна причина та recovery owner/action.</p></div>
+  </div>
+
+  <h2>8. Контрольна точка Дня 1</h2>
+  <div class="checkpoint"><strong>Обов’язковий evidence:</strong> одна readiness note з software versions і account/repository status, яка завершується <code>READY</code> або <code>BLOCKED: &lt;reason&gt;</code> плюс next recovery action. Participant agent test на День 1 не потрібен.</div>
+
+  <h3>Двохвилинне завершення</h3>
+  <p>Завершіть три речення:</p>
+  <ol>
+    <li><strong>LLM — це...</strong></li>
+    <li><strong>Agent відрізняється від chatbot тим, що...</strong></li>
+    <li><strong>Я не надав би educational agent tool, доки...</strong></li>
+  </ol>
+
+  <div class="callout"><strong>Далі:</strong> Day 2 використовує ChatGPT як supervised coding assistant. Ви внесете невелику видиму зміну до synthetic-data dashboard, перевірите diff, виконаєте restore і підготуєте окремий agent starter до Day 3.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Редакція 6 · День 1 · Українська · ЗРОЗУМІТИ</div></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>
