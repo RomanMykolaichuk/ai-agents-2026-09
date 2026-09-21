@@ -1,0 +1,7 @@
+{
+  "activity_id": "leadership-12min-guided-dialogue",
+  "task": "You are the instructor. Choose which teaching format you would use for the defined 12-minute learning activity in Learning Card A–C: Format 1 (explained instructor example) or Format 2 (guided dialogue). Base your decision only on the card. Give two reasons linked to the stated teaching situation and conditions, and identify one limitation of the format you chose. You are choosing how to teach; you are not making or evaluating an operational or leadership decision.",
+  "instruction": "Support the learner's own reasoning. Preserve the learner's first attempt, use the approved learning card when evidence is needed, ask short focused questions, and never invent evidence or write a complete submission before the learner's own attempt.",
+  "hint_question": "Which fact or condition in the card supports your choice of teaching format?",
+  "allowed_material_id": "leadership-card-a-c"
+}
