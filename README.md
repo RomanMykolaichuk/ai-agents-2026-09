@@ -11,18 +11,19 @@ Public participant repository for the September 2026 workshop **AI Agents for De
 
 ## Start here
 
-1. Open the learning platform (GitHub Pages, when enabled):  
+1. Enable the learning platform once in GitHub: **Settings → Pages → Source: GitHub Actions**, then run **Actions → Deploy participant learning platform → Run workflow**.
+2. Open the platform at:  
    https://romanmykolaichuk.github.io/ai-agents-2026-09/
-2. Before practical work, complete `docs/PREFLIGHT.md`.
-3. Clone the repository:
+3. Before practical work, complete `docs/PREFLIGHT.md`.
+4. Clone the repository:
 
 ```bash
 git clone https://github.com/RomanMykolaichuk/ai-agents-2026-09.git
 cd ai-agents-2026-09
 ```
 
-4. Day 2 practical: `dashboard/`.
-5. Days 3–4 agent runtime: `starter/`.
+5. Day 2 practical: `dashboard/`.
+6. Days 3–4 agent runtime: `starter/`.
 
 ## Security rule
 
