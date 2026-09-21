@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>День 5 — Демонстрація, обговорення та фідбек</title><link rel="stylesheet" href="../css/site.css"></head>
+<body><a class="skip-link" href="#main">Перейти до основного вмісту</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../en/day-5.html" lang="en">English</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Меню</button></div></div><nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Навігація воркшопу"><ul><li><a href="index.html">Початок</a></li><li><a href="day-1.html">День 1</a></li><li><a href="day-2.html">День 2</a></li><li><a href="day-3.html">День 3</a></li><li><a href="day-4.html">День 4</a></li><li><a aria-current="page" href="day-5.html">День 5</a></li><li><a href="recovery.html">Відновлення</a></li><li><a href="resources.html">Ресурси</a></li></ul></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">День 5 · 60 хвилин · EXPLAIN, DISCUSS, TRANSFER</p><h1>Демонстрація, обговорення та фідбек</h1><p class="lead">Перетворити чотири дні створення й тестування на коротке професійне пояснення: яку educational problem вирішує prototype, що agent реально робить, який evidence підтримує його behaviour, де залишаються limits і що ви робили б далі.</p><span class="status">No major new build · evidence + reflection + transfer</span></section>
+
+<div class="notice"><strong>Межа Дня 5:</strong> не створюйте new feature лише для того, щоб зробити demonstration ефектнішою. Показуйте final tested version з Дня 4. Якщо змінюєте instruction, configuration або code, required T1–T3 set потрібно повторити до того, як називати new version tested.</div>
+
+<h2>Навчальні цілі</h2>
+<div class="grid">
+  <div class="card"><h3>Пояснювати purpose до technology</h3><p>Починати з learner/instructor need, а потім пояснювати, як prototype її підтримує.</p></div>
+  <div class="card"><h3>Показувати evidence, а не claims</h3><p>Використати один real tool/log item і final T1–T3 record замість фрази “agent works”.</p></div>
+  <div class="card"><h3>Не приховувати limits</h3><p>Назвати одну human-control point і одну condition, яку workshop не validated.</p></div>
+  <div class="card"><h3>Переносити pattern</h3><p>Відповісти на одну new condition: що зміниться і що треба retest — без live coding.</p></div>
+  <div class="card"><h3>Давати actionable feedback</h3><p>Розділяти workshop-content feedback, technical blockers і власну next-step idea.</p></div>
+</div>
+
+<h2>1. Відкрийте final tested version</h2>
+<p>До presentation переконайтеся, що configuration і evidence належать одній і тій самій final Day 4 version.</p>
+<div class="grid">
+  <div class="card"><h3>Version</h3><p>Знайте local checkpoint/commit або інший clear identity версії, яку показуєте.</p></div>
+  <div class="card"><h3>Tool evidence</h3><p>Підготуйте один real <code>read_course_material</code> log entry без secrets.</p></div>
+  <div class="card"><h3>Test evidence</h3><p>Майте final T1, T2 і T3 results саме від цієї version.</p></div>
+  <div class="card"><h3>Limitation</h3><p>Підготуйте concrete human-control/validation limitation, а не generic “AI can make mistakes”.</p></div>
+</div>
+
+<h2>2. Структура трьохвилинної demonstration</h2>
+<p>Сильна demonstration — це короткий argument, а не tour усіх files. Використовуйте такий порядок:</p>
+<div class="page-sequence">
+  <div><strong>Problem</strong><br>Яка learner/instructor action потребує support?</div>
+  <div><strong>Prototype</strong><br>Що agent робить — і чого не робить?</div>
+  <div><strong>Bounded change</strong><br>Яку одну participant-controlled change ви зробили?</div>
+  <div><strong>Real action</strong><br>Покажіть один factual tool/log record</div>
+  <div><strong>Tests</strong><br>Стисло final T1–T3 results</div>
+  <div><strong>Limitation</strong><br>Де human judgment досі потрібний?</div>
+  <div><strong>Next step</strong><br>Що ви validated/adapted би далі?</div>
+</div>
+
+<h2>3. Checklist якості demonstration</h2>
+<div class="card"><table><thead><tr><th>Dimension</th><th>Clear demonstration показує…</th></tr></thead><tbody>
+<tr><td>Educational purpose</td><td>specific learner/instructor need, а не “AI is useful”</td></tr>
+<tr><td>Agent explanation</td><td>instruction + model + approved tool/source + boundary plain language</td></tr>
+<tr><td>Participant authorship</td><td>one bounded change, яку participant understands and explains</td></tr>
+<tr><td>Execution evidence</td><td>one observable factual tool/log item</td></tr>
+<tr><td>Testing evidence</td><td>final-version T1–T3 result + correction/retest або NO CHANGE decision</td></tr>
+<tr><td>Responsible limits</td><td>one concrete limitation/human-control point без production-readiness overclaim</td></tr>
+</tbody></table></div>
+
+<h3>Mini-check — з чого почати demo?</h3>
+<div class="interaction self-check" data-self-check data-correct="problem" data-correct-feedback="Правильно. Починайте з educational problem, а prototype/evidence показуйте як відповідь на неї." data-incorrect-feedback="Day 5 — не конкурс code complexity. Починайте з educational need.">
+  <fieldset><legend>Яким має бути first sentence сильної Day 5 demonstration?</legend>
+    <label><input type="radio" name="d5-check-1" value="files"> “My project has these files and libraries…”</label>
+    <label><input type="radio" name="d5-check-1" value="problem"> “The educational problem I wanted to support was…”</label>
+    <label><input type="radio" name="d5-check-1" value="model"> “The model is very powerful…”</label>
+  </fieldset>
+  <button class="control-button" type="button" data-self-check-submit>Перевірити відповідь</button><p class="self-check-feedback" data-self-check-feedback></p>
+</div>
+
+<h2>4. Одна new condition — transfer без live coding</h2>
+<p>Після demo instructor дає one new condition. Відповідь має чотири parts:</p>
+<ol>
+  <li><strong>What changes?</strong> Визначте affected part educational design/application.</li>
+  <li><strong>What stays fixed?</strong> Зберігайте safety/data/tool boundaries, якщо institution окремо не redesign/revalidate їх.</li>
+  <li><strong>What would you modify?</strong> Назвіть smallest plausible change.</li>
+  <li><strong>What must be retested?</strong> Поясніть, який previous evidence стане stale.</li>
+</ol>
+<div class="grid">
+  <div class="card"><h3>Condition A — only 8 minutes</h3><p>Скоротіть learning workflow; не перекладайте більше роботи на model замість learner. Revalidate timing + learner-first behaviour.</p></div>
+  <div class="card"><h3>Condition B — less experienced learners</h3><p>Збільшіть scaffolding/focused questions, але preserve independent learner contribution. Retest T3-like authorship boundary.</p></div>
+  <div class="card"><h3>Condition C — two approved sources</h3><p>Current one-material boundary already insufficient. Source selection/tool logic і grounding tests потребують redesign/validation.</p></div>
+  <div class="card"><h3>Condition D — no cloud provider</h3><p>Saved evidence можна показати, але live inference unavailable. Local inference route потребує separate setup/validation до claim of equivalence.</p></div>
+  <div class="card"><h3>Condition E — restricted material</h3><p>Не додавайте його в current cloud workshop route. Data boundary, local/institutional infrastructure і approvals потребують separate design.</p></div>
+</div>
+
+<h3>Mini-check — який evidence стає stale?</h3>
+<div class="interaction self-check" data-self-check data-correct="retest" data-correct-feedback="Правильно. Після behaviour/configuration change previous evidence більше не certifies modified version." data-incorrect-feedback="Day 4 встановив final-version rule: changed version потребує new relevant evidence.">
+  <fieldset><legend>Ви substantially change instruction для new learner group. Чи можна старий T1–T3 record називати proof нової version?</legend>
+    <label><input type="radio" name="d5-check-2" value="yes"> Так, бо це same project</label>
+    <label><input type="radio" name="d5-check-2" value="retest"> Ні; changed behaviour треба retest</label>
+    <label><input type="radio" name="d5-check-2" value="model"> Так, якщо same model</label>
+  </fieldset>
+  <button class="control-button" type="button" data-self-check-submit>Перевірити відповідь</button><p class="self-check-feedback" data-self-check-feedback></p>
+</div>
+
+<h2>5. Discussion — де agent справді є right tool?</h2>
+<div class="grid">
+  <div class="card"><h3>Good candidate</h3><p>Repeated educational workflow має defined learner/instructor action, clear evidence sources, bounded tools і observable outputs.</p></div>
+  <div class="card"><h3>Maybe just use a chatbot</h3><p>Task — one-off explanation/brainstorming і controlled external action/source workflow не потрібний.</p></div>
+  <div class="card"><h3>Maybe use static material</h3><p>Learner потрібен fixed explanation/checklist/reference, а adaptive behaviour дає мало additional value.</p></div>
+  <div class="card"><h3>Stop / redesign first</h3><p>Task потребує sensitive data, poorly defined responsibility, unbounded external actions або reliability level, який prototype не validated.</p></div>
+</div>
+
+<h2>6. Синтез усього workshop</h2>
+<div class="page-sequence">
+  <div><strong>Day 1 — UNDERSTAND</strong><br>AI, LLMs, assistants, agents, tools, human control</div>
+  <div><strong>Day 2 — CREATE WITH AI</strong><br>controlled vibe coding + Git evidence/recovery</div>
+  <div><strong>Day 3 — BUILD AN AGENT</strong><br>pipeline, source/tool evidence, bounded instruction change</div>
+  <div><strong>Day 4 — TEST AN AGENT</strong><br>T1–T3, diagnosis, correction + regression rule</div>
+  <div><strong>Day 5 — EXPLAIN & TRANSFER</strong><br>demo, limits, new condition, feedback + next step</div>
+</div>
+<p>Common thread — <strong>human control over increasingly capable workflows</strong>: спочатку understand, потім safely change software, потім build bounded agent, test it, і нарешті explain when the pattern should or should not be reused.</p>
+
+<h2>7. Feedback — робимо його actionable</h2>
+<p>Використайте approved feedback route. Не додавайте API keys, project secrets, sensitive information або private execution logs.</p>
+<div class="card"><ol>
+  <li><strong>Value:</strong> Яка частина найбільше покращила вашу ability to understand/work with AI agents?</li>
+  <li><strong>Clarity:</strong> Який concept/task був найменш зрозумілим?</li>
+  <li><strong>Pacing:</strong> Якому day потрібно more time? Який може бути shorter?</li>
+  <li><strong>Technical friction:</strong> Який blocker забрав найбільше часу?</li>
+  <li><strong>Transfer:</strong> Який educational-agent use case ви спробували б next?</li>
+  <li><strong>Confidence:</strong> Що тепер можете виконати independently: run / change / inspect tool evidence / test / explain?</li>
+  <li><strong>Instructor improvement:</strong> Яка one change найбільше покращить next delivery?</li>
+</ol></div>
+
+<h2>8. Оберіть один realistic next step</h2>
+<p>Next step має бути достатньо малим для validation. Оберіть один:</p>
+<div class="grid">
+  <div class="card"><h3>Refine this prototype</h3><p>Покращити same single-agent learning workflow на основі testing + feedback evidence.</p></div>
+  <div class="card"><h3>Adapt the pattern</h3><p>Використати same bounded architecture для іншого public/synthetic educational case і створити new test set.</p></div>
+  <div class="card"><h3>Plan an institutional pilot</h3><p>Визначити approved data, infrastructure, responsibilities, support і acceptance evidence до real learner use.</p></div>
+  <div class="card"><h3>Stop deliberately</h3><p>Зафіксувати, чому use case не виправдовує agent. Decision not to automate може бути valid outcome.</p></div>
+</div>
+<p>Advanced RAG, multi-agent systems, MCP/A2A, broad tool access і production deployment залишаються outside the five-day pilot, якщо later course/revision явно їх не вводить.</p>
+
+<h2>Карта 60-хвилинного заняття</h2>
+<div class="page-sequence"><div><strong>0–5</strong><br>Reopen final version + demo criteria</div><div><strong>5–35</strong><br>Participant demonstrations (adapt to cohort size)</div><div><strong>35–44</strong><br>New-condition transfer questions</div><div><strong>44–51</strong><br>Patterns, limits + “agent vs simpler tool” discussion</div><div><strong>51–55</strong><br>Five-day synthesis</div><div><strong>55–60</strong><br>Feedback + individual next step</div></div>
+<div class="notice"><strong>Cohort-size rule:</strong> ~3 minutes per participant + transitions можуть перевищити 60 minutes. Confirm actual cohort size before delivery. Якщо треба, використайте pre-agreed subset, paired demos або separate support/demo block — не видаляйте silently discussion/feedback objectives.</div>
+
+<h2>Фінальна контрольна точка</h2>
+<div class="grid">
+  <div class="card"><h3>Demonstration</h3><p>Educational problem → prototype → bounded change → real action evidence → final T1–T3 → limitation.</p></div>
+  <div class="card"><h3>Transfer</h3><p>Ви відповіли на one new condition: what changes, what stays fixed, what must be retested.</p></div>
+  <div class="card"><h3>Feedback</h3><p>Ви дали actionable feedback через approved route без secrets/sensitive data.</p></div>
+  <div class="card"><h3>Next step</h3><p>Ви назвали realistic continuation — або deliberate stop — і validation needed before real learner use.</p></div>
+</div>
+
+<div class="callout"><strong>Результат воркшопу:</strong> від вас не очікується, що ви станете software engineer. Ви маєте вміти пояснити agentic educational application, використати AI для controlled software changes, побачити real action простого агента, змінити one bounded behaviour, протестувати important boundaries і пояснити educational value та limitations.</div>
+</main><footer class="page-footer"><div class="footer-inner">Revision 6 · День 5 · Українська · EXPLAIN, DISCUSS, TRANSFER</div></footer><script src="../js/site.js"></script></body></html>

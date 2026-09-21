@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ресурси — AI Agents for Defence Education</title><link rel="stylesheet" href="../css/site.css"></head>
+<body>
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../en/resources.html" lang="en">English</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Меню</button></div></div><nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Навігація воркшопу"><ul><li><a href="index.html">Початок</a></li><li><a href="day-1.html">День 1</a></li><li><a href="day-2.html">День 2</a></li><li><a href="day-3.html">День 3</a></li><li><a href="day-4.html">День 4</a></li><li><a href="day-5.html">День 5</a></li><li><a href="recovery.html">Відновлення</a></li><li><a aria-current="page" href="resources.html">Ресурси</a></li></ul></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Редакція 6 · Ресурси</p><h1>Погоджені матеріали для учасника</h1><p class="lead">Насамперед використовуйте файли воркшопу. Зовнішні посилання нижче ведуть на офіційні сторінки setup/reference і мають бути повторно перевірені незадовго до проведення.</p><span class="status">Participant references + glossary + support boundary</span></section>
+<div class="notice"><strong>Не передавайте secrets:</strong> ніколи не розміщуйте Groq keys, вміст <code>.env</code>, private repository tokens, приватні логи, паролі, матеріали з обмеженим доступом або admin/edit links у цьому сайті, ChatGPT, screenshots чи feedback.</div>
+
+<h2>Маршрути воркшопу</h2>
+<div class="grid">
+  <div class="card"><h3>Day 2 dashboard</h3><p><code>dashboard/</code></p><p>Baseline: 8 learners, average attempts 1.75. Required changes: Completed learners = 6; follow-up = Learner 04 + Learner 07.</p></div>
+  <div class="card"><h3>Day 3–4 starter</h3><p><code>starter/</code></p><p>Prepared FastAPI runtime з одним allow-listed <code>read_course_material</code> tool і локальним ignored <code>.env</code>.</p></div>
+  <div class="card"><h3>Відновлення</h3><p><a href="recovery.html">Відкрити сторінку Recovery</a> для виконуваних маршрутів troubleshooting Days 1–5 та узгодженої мови статусів.</p></div>
+  <div class="card"><h3>Formal tests</h3><p>T1–T3 завантажуються зі starter UI на Day 4. Використовуйте prepared buttons, щоб stage/history скидалися до canonical test state.</p></div>
+</div>
+
+<h2>Офіційні setup references</h2>
+<div class="grid">
+  <div class="card"><h3>Python</h3><p><a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener noreferrer">Python for Windows — official downloads</a></p><p>Workshop baseline: Python 3.12. Не змінюйте версію під час заняття без окремої перевірки.</p></div>
+  <div class="card"><h3>Git</h3><p><a href="https://git-scm.com/download/win" target="_blank" rel="noopener noreferrer">Git for Windows — official download</a></p><p>У core session використовуйте точні команди воркшопу, а не загальний Git tutorial.</p></div>
+  <div class="card"><h3>VS Code</h3><p><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">Visual Studio Code — official download</a></p><p>Воркшоп не потребує спеціального набору extensions.</p></div>
+  <div class="card"><h3>GitHub</h3><p><a href="https://docs.github.com/en/get-started" target="_blank" rel="noopener noreferrer">GitHub Docs — Get started</a></p><p>Repository access бажано перевірити до Day 1.</p></div>
+  <div class="card"><h3>Groq</h3><p><a href="https://console.groq.com/docs/quickstart" target="_blank" rel="noopener noreferrer">Groq API Quickstart</a></p><p>Використовуйте лише локальний <code>.env</code> route, визначений воркшопом. Provider/model availability перевіряється перед delivery.</p></div>
+</div>
+
+<h2>Короткий глосарій</h2>
+<div class="grid">
+  <div class="card"><h3>Model</h3><p>Мовна модель, що генерує відповідь із наданого context. Це лише один компонент agentic application.</p></div>
+  <div class="card"><h3>Agentic application</h3><p>Застосунок, що поєднує instructions/context, model, approved actions/tools, observations, limits і human control.</p></div>
+  <div class="card"><h3>Tool</h3><p>Можливість, яку application надає model. У core workshop tool read-only та allow-listed.</p></div>
+  <div class="card"><h3>Grounding</h3><p>Використання approved source для factual support замість вигаданого evidence.</p></div>
+  <div class="card"><h3>Factual log</h3><p>Application evidence того, яка action/tool фактично виконалася. Текст model “я використав джерело” не є рівноцінним доказом.</p></div>
+  <div class="card"><h3>Bounded change</h3><p>Навмисно мала зміна з явним scope, expected result, evidence і recovery path.</p></div>
+  <div class="card"><h3>Checkpoint</h3><p>Відомий працездатний version/state, який можна ідентифікувати й відновити перед наступною роботою.</p></div>
+  <div class="card"><h3>Technical error</h3><p>Runtime/provider failure. Спочатку його потрібно відновити, а вже потім оцінювати behavioural quality.</p></div>
+  <div class="card"><h3>Instructor required</h3><p>Стан, коли application навмисно зупиняється, бо configured boundary або schema потребує втручання людини.</p></div>
+  <div class="card"><h3>Human outcome</h3><p>Day 4 evidence label: <strong>PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL</strong>. Він відокремлений від runtime status.</p></div>
+</div>
+
+<h2>Support і feedback route</h2>
+<div class="grid">
+  <div class="card"><h3>Під час pilot</h3><p>Для unresolved setup/recovery blockers використовуйте викладача та optional up-to-30-minute post-session support. Передавайте лише non-sensitive command/error state.</p></div>
+  <div class="card"><h3>Feedback</h3><p>Organiser-approved participant-facing feedback URL має бути підтверджений до final GO. До цього placeholder або private edit/admin URL не вважається погодженим submission route.</p></div>
+</div>
+<div class="callout"><strong>Release rule:</strong> якщо external link, provider model, feedback form або support route змінюється до delivery, оновіть delivery-specific evidence, а не припускайте, що старий маршрут все ще працює.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Редакція 6 · Ресурси · Українська</div></footer><script src="../js/site.js"></script>
+</body></html>

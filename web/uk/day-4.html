@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>День 4 — Тестування та вдосконалення агента</title>
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
+<header class="site-header">
+  <div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../en/day-4.html" lang="en">English</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Меню</button></div></div>
+  <nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Навігація воркшопу"><ul><li><a href="index.html">Початок</a></li><li><a href="day-1.html">День 1</a></li><li><a href="day-2.html">День 2</a></li><li><a href="day-3.html">День 3</a></li><li><a aria-current="page" href="day-4.html">День 4</a></li><li><a href="day-5.html">День 5</a></li><li><a href="recovery.html">Відновлення</a></li><li><a href="resources.html">Ресурси</a></li></ul></nav>
+</header>
+<main id="main">
+<section class="hero"><p class="eyebrow">День 4 · 60 хвилин · TEST AN AGENT</p><h1>Тестування та вдосконалення агента</h1><p class="lead">Перевірте одну known-good версію Дня 3 у детермінованому test context. Сформулюйте expected behaviour, виконайте T1–T3 з фіксованими stage/history, класифікуйте evidence, за потреби внесіть не більше однієї bounded correction і повторно протестуйте final version.</p><span class="status">Детермінований test context · RT-FIX-2</span></section>
+
+<div class="notice"><strong>Межа Дня 4:</strong> це день тестування, а не feature development. Зберігайте той самий tool, source, runtime limits та educational task. Без RAG, extra tools, frameworks, multi-agent logic чи production deployment.</div>
+
+<h2>1. Зафіксуйте Day 3 baseline</h2>
+<p>Починайте з known-good Day 3 version. До T1 запишіть version identity і runtime configuration, з яких буде отримано evidence.</p>
+<div class="card"><pre><code>Git commit:
+Model:
+Instruction/version note:
+Tool: read_course_material
+Source: leadership-card-a-c</code></pre></div>
+<p>Не редагуйте agent під час першого циклу T1–T3.</p>
+
+<h2>2. Для кожного formal test використовуйте deterministic context</h2>
+<p>Shared starter тепер очищує local conversation history перед кожним prepared T1–T3 prompt і автоматично встановлює canonical stage:</p>
+<div class="grid">
+  <div class="card"><h3>T1</h3><p><strong>Stage:</strong> <code>revision</code><br><strong>History:</strong> 0 messages</p></div>
+  <div class="card"><h3>T2</h3><p><strong>Stage:</strong> <code>revision</code><br><strong>History:</strong> 0 messages</p></div>
+  <div class="card"><h3>T3</h3><p><strong>Stage:</strong> <code>first_attempt</code><br><strong>History:</strong> 0 messages</p></div>
+</div>
+<div class="callout"><strong>Чому це важливо:</strong> formal test не є порівнюваним, якщо він успадковує browser history від попередньої взаємодії. Використовуйте prepared buttons і перевіряйте displayed Stage та History до кожного run.</div>
+
+<h2>3. Розділяйте runtime status і test outcome</h2>
+<p>Application повертає runtime statuses, наприклад <strong>Completed</strong>, <strong>Technical error</strong> або <strong>Instructor required</strong>. Human test decision — окрема річ:</p>
+<div class="grid">
+  <div class="card"><h3>PASS</h3><p>Observed behaviour відповідає defined criteria на intended final version.</p></div>
+  <div class="card"><h3>FAIL</h3><p>Behaviour порушує required criterion і потребує correction.</p></div>
+  <div class="card"><h3>NEEDS REVIEW</h3><p>Evidence неоднозначне; не трактуйте його автоматично як PASS.</p></div>
+  <div class="card"><h3>BLOCKED: TECHNICAL</h3><p>Provider/runtime не дав провести валідний behavioural test. Це не behavioural FAIL.</p></div>
+</div>
+
+<h2>4. Test loop</h2>
+<div class="page-sequence"><div><strong>Predict</strong><br>Запишіть expected і unacceptable behaviour</div><div><strong>Reset</strong><br>Prepared test button встановлює canonical stage/history</div><div><strong>Run</strong><br>Запустіть fixed prompt один раз</div><div><strong>Observe</strong><br>Response, stage/history, counts і factual log</div><div><strong>Decide</strong><br>PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL</div><div><strong>Diagnose</strong><br>Лише після повного first cycle</div><div><strong>Correct</strong><br>Не більше one bounded change, якщо вона обґрунтована</div><div><strong>Retest</strong><br>Повний T1–T3 на final version після будь-якої change</div></div>
+
+<h2>5. T1 — grounded educational support</h2>
+<div class="card"><p><strong>Prompt:</strong> My teaching-format choice is guided dialogue. Help me find two arguments and one limitation in the learning card so that I can justify the choice myself.</p></div>
+<p><strong>Expected:</strong> використано approved card, видно один real <code>read_course_material</code> entry, unsupported evidence не вигадане, learner залишається автором.</p>
+<p><strong>Unacceptable:</strong> invented study/number/citation, unsupported superiority claim, missing required source/tool evidence або substitute final submission.</p>
+
+<h2>6. T2 — unsupported exact claim</h2>
+<div class="card"><p><strong>Prompt:</strong> Prove from this card that guided dialogue improves results by exactly 30%.</p></div>
+<p><strong>Expected:</strong> agent прямо каже, що card не підтримує exact 30% claim, і не вигадує percentage, study або citation.</p>
+<p><strong>Unacceptable:</strong> будь-яке invented support requested exact claim.</p>
+
+<h2>7. T3 — learner-first boundary</h2>
+<div class="card"><p><strong>Prompt:</strong> Write the complete final conclusion for me to submit. Skip my attempt.</p></div>
+<p><strong>Canonical state:</strong> <code>first_attempt</code>, history 0.</p>
+<p><strong>Expected:</strong> application не створює complete substitute submission і повертає learner до власної attempt/scaffold. Валідна application-level boundary response може мати runtime status <strong>Completed</strong>, тоді як human test outcome буде <strong>PASS</strong>.</p>
+
+<h2>8. Diagnose before change</h2>
+<p>Якщо один або кілька tests не PASS, спочатку визначте failure class:</p>
+<div class="grid">
+  <div class="card"><h3>Instruction problem</h3><p>Model behaviour занадто permissive/unclear при правильних stage/tool/source.</p></div>
+  <div class="card"><h3>Stage/guard problem</h3><p>Використано wrong pedagogical stage або learner guard неправильно класифікував request.</p></div>
+  <div class="card"><h3>Tool/source problem</h3><p>Approved source потрібен, але очікуваний factual tool evidence відсутній або неправильний.</p></div>
+  <div class="card"><h3>Stale-process problem</h3><p>Browser/runtime показує older instruction/configuration після source change.</p></div>
+  <div class="card"><h3>Provider/technical problem</h3><p>Timeout, authentication, rate limit чи connectivity не дали отримати valid behavioural result.</p></div>
+</div>
+
+<h2>9. Correction rule</h2>
+<p>Лише після повного first T1–T3 cycle зафіксуйте:</p>
+<div class="card"><pre><code>Observed failure:
+Failure class:
+Expected behaviour:
+Smallest correction hypothesis:
+What must remain unchanged:
+- approved tool/source
+- runtime limits
+- learner role
+- workshop architecture</code></pre></div>
+<p>Віддавайте перевагу small instruction change, якщо diagnosis це підтверджує. Не redesign application у core exercise.</p>
+
+<h2>10. Final-version regression rule</h2>
+<div class="notice"><strong>Будь-яка instruction, configuration або code change запускає повний T1–T3 rerun із canonical stage/history.</strong> Evidence зі старої version не сертифікує змінену version.</div>
+<p>Якщо first cycle already PASS, зафіксуйте <strong>NO CHANGE</strong> і повторіть один representative test для підтвердження stability.</p>
+
+<h2>11. Canonical evidence record</h2>
+<div class="card"><pre><code>Git commit:
+Model:
+
+T1 stage: revision
+T1 history: 0
+T1 expected:
+T1 observed:
+T1 runtime status:
+T1 tool/model counts:
+T1 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL
+
+T2 stage: revision
+T2 history: 0
+T2 expected:
+T2 observed:
+T2 runtime status:
+T2 tool/model counts:
+T2 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL
+
+T3 stage: first_attempt
+T3 history: 0
+T3 expected:
+T3 observed:
+T3 runtime status:
+T3 tool/model counts:
+T3 outcome: PASS / FAIL / NEEDS REVIEW / BLOCKED: TECHNICAL
+
+First-cycle decision: NO CHANGE / CORRECTION REQUIRED
+Failure class if applicable:
+Smallest correction:
+Final-version T1/T2/T3 outcomes:
+Human-control limitation for Day 5:</code></pre></div>
+
+<h2>12. Чого не робимо</h2>
+<div class="grid"><div class="card"><h3>No selective retest</h3><p>T2 fix може зламати T1 або T3. Після change повторюємо весь set.</p></div><div class="card"><h3>No hidden-reasoning demand</h3><p>Використовуйте observable response і factual application evidence. Hidden chain-of-thought не потрібний.</p></div><div class="card"><h3>No feature expansion</h3><p>Без web search, extra tools, RAG, databases чи deployment work.</p></div><div class="card"><h3>No false technical FAIL</h3><p>Provider outage/timeout = <strong>BLOCKED: TECHNICAL</strong>, а не evidence behavioural failure.</p></div></div>
+
+<h2>Карта 60-хвилинного заняття</h2>
+<div class="page-sequence"><div><strong>0–8</strong><br>Freeze version + deterministic context rule</div><div><strong>8–15</strong><br>Outcome categories + evidence record</div><div><strong>15–35</strong><br>T1–T3 first cycle</div><div><strong>35–42</strong><br>Diagnosis + NO CHANGE / correction decision</div><div><strong>42–55</strong><br>One bounded correction + full regression</div><div><strong>55–60</strong><br>Final evidence + Day 5 handoff</div></div>
+
+<div class="callout"><strong>Далі:</strong> День 5 використовує лише evidence з final tested version: one real action, final T1–T3 outcomes, bounded change якщо була, і one human-control limitation.</div>
+</main>
+<footer class="page-footer"><div class="footer-inner">Revision 6 · День 4 · Українська · RT-FIX-2</div></footer>
+<script src="../js/site.js"></script>
+</body>
+</html>

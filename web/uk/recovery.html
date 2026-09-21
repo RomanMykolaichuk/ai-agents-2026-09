@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="uk">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Відновлення — AI Agents for Defence Education</title><link rel="stylesheet" href="../css/site.css"></head>
+<body>
+<a class="skip-link" href="#main">Перейти до основного вмісту</a>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html">AI Agents for Defence Education</a><div class="header-actions"><a class="lang-link" href="../en/recovery.html" lang="en">English</a><button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav">Меню</button></div></div><nav class="site-nav" id="main-nav" data-site-nav data-collapsible="true" aria-label="Навігація воркшопу"><ul><li><a href="index.html">Початок</a></li><li><a href="day-1.html">День 1</a></li><li><a href="day-2.html">День 2</a></li><li><a href="day-3.html">День 3</a></li><li><a href="day-4.html">День 4</a></li><li><a href="day-5.html">День 5</a></li><li><a aria-current="page" href="recovery.html">Відновлення</a></li><li><a href="resources.html">Ресурси</a></li></ul></nav></header>
+<main id="main">
+<section class="hero"><p class="eyebrow">Редакція 6 · Відновлення</p><h1>Відновлюємо навчальний маршрут, а не лише програму</h1><p class="lead">Застосовуйте найменшу коректну дію відновлення, зберігайте відомі працездатні стани та не плутайте технічну помилку з поведінковою.</p><span class="status">Маршрути відновлення після red-team аналізу</span></section>
+<div class="notice"><strong>Межа безпеки:</strong> ніколи не вставляйте й не показуйте API keys, вміст <code>.env</code>, приватні логи, матеріали з обмеженим доступом або персональні дані учасників під час отримання допомоги. Демонстрація викладача може підтримати обговорення, але не замінює обов’язковий практичний доказ учасника.</div>
+
+<h2>Перше рішення: який це тип збою?</h2>
+<div class="grid">
+  <div class="card"><h3>Setup / environment</h3><p>Python, Git, VS Code, папки, virtual environment або відсутні локальні файли.</p></div>
+  <div class="card"><h3>Project / Git</h3><p>Змінено не той файл, надмірний AI patch, втрачено baseline, проблема restore/reapply.</p></div>
+  <div class="card"><h3>Runtime / provider</h3><p>Процес Uvicorn, <code>.env</code>, мережа, Groq authentication/rate limit/model availability.</p></div>
+  <div class="card"><h3>Поведінка агента</h3><p>Grounding, unsupported claims, learner-first boundary або відсутність очікуваної tool action після підтвердження працездатного технічного стану.</p></div>
+</div>
+
+<h2>Відновлення День 1–2</h2>
+<div class="grid">
+  <div class="card"><h3>Не та папка / команда не працює</h3><p>Спочатку поверніться до кореня репозиторію:</p><pre><code>git rev-parse --show-toplevel</code></pre><p>Потім виконуйте точний маршрут Day 2. Не вгадуйте відносні шляхи з невідомої папки.</p></div>
+  <div class="card"><h3>Dashboard відкрито через file://</h3><p>Не використовуйте файл, відкритий подвійним кліком. З папки <code>dashboard/</code> запустіть локальний HTTP server на <code>127.0.0.1</code> і відкрийте <code>http://127.0.0.1:8002/</code>.</p></div>
+  <div class="card"><h3>ChatGPT пропонує великий refactor</h3><p>Відхиліть його. Передайте лише актуальні dashboard files, потрібні для задачі, і попросіть найменшу зміну vanilla HTML/JavaScript. Не завантажуйте архів репозиторію або secrets.</p></div>
+  <div class="card"><h3>Змінено data.json</h3><p>Відновіть <code>data.json</code> з Git до оцінювання функції. Очікувані результати Day 2 мають обчислюватися кодом з незмінених synthetic records.</p></div>
+</div>
+
+<h2>Day 2 Git recovery — канонічний маршрут</h2>
+<p>Виконуйте Git evidence з кореня репозиторію. Перед restore збережіть прийнятий dashboard state поза репозиторієм.</p>
+<pre><code>git diff -- dashboard &gt; ../aade-dashboard-accepted.patch
+git restore --staged --worktree -- dashboard
+# перевірте baseline у браузері
+git apply ../aade-dashboard-accepted.patch
+# перевірте KPI = 6 і follow-up filter = Learner 04 + Learner 07</code></pre>
+<div class="callout"><strong>Якщо git apply не працює:</strong> зупиніться. Не додавайте випадкові виправлення. Переконайтеся, що ви в repository root, dashboard повернувся до очікуваного baseline, після чого викладач перевіряє patch і working-tree state. Якщо це загрожує 60-хвилинному core session, перенесіть recovery в optional support.</div>
+
+<h2>Starter: first setup і restart — різні операції</h2>
+<div class="grid">
+  <div class="card"><h3>.env відсутній</h3><p>Створіть його з <code>.env.example</code> лише якщо файла ще немає, відредагуйте локально та перевірте <code>git check-ignore -v .env</code>.</p></div>
+  <div class="card"><h3>.env уже існує</h3><p>Не копіюйте <code>.env.example</code> поверх нього. Перезапускайте вже налаштований starter без перезапису credentials.</p></div>
+  <div class="card"><h3>Невірний key</h3><p>Health page зі станом “key present” не перевіряє валідність credential. Має успішно пройти реальний provider request. Виправте локальний <code>.env</code> і перезапустіть; ніколи не вставляйте key у support chat.</p></div>
+  <div class="card"><h3>Groq rate limit / model unavailable</h3><p>Класифікуйте як <strong>BLOCKED: TECHNICAL</strong>. Використайте provider message для рішення про retry або перехід викладача на окремо перевірену модель. Не змінюйте модель непомітно посеред тесту.</p></div>
+</div>
+
+<h2>Відновлення Day 3 runtime</h2>
+<div class="grid">
+  <div class="card"><h3>Port 8001 / старий процес Uvicorn</h3><p>Зупиніть старий процес у terminal, де його запускали. Перезапустіть із <code>starter/</code> документованою командою з <code>--env-file .env</code>, потім hard-refresh браузер.</p></div>
+  <div class="card"><h3>Зміна activity.json не видима</h3><p>Спочатку перевірте repository-root diff. Якщо файл змінився, а UI показує старий текст, це stale process state: restart Uvicorn, потім reload.</p></div>
+  <div class="card"><h3>Немає tool call у grounded run</h3><p>Поверніться до prepared Day 3 request, <code>stage=revision</code>, <code>history=0</code>. Переконайтеся, що request вимагає evidence з learning card і approved material ID не змінений. Не додавайте новий tool як обхідний шлях.</p></div>
+  <div class="card"><h3>Порожня/technical provider response</h3><p>Зафіксуйте <strong>Technical error</strong>. Не оцінюйте поведінку до відновлення технічного стану та повторного запуску того самого canonical request.</p></div>
+</div>
+
+<h2>Відновлення Day 4 testing</h2>
+<div class="grid">
+  <div class="card"><h3>T1 не grounded</h3><p>Спочатку підтвердьте canonical context: <code>revision</code>, history 0, правильний source/tool, відсутність stale process. Лише після цього діагностуйте instruction.</p></div>
+  <div class="card"><h3>T2 вигадує evidence</h3><p>Зафіксуйте <strong>FAIL</strong>, визначте найменшу поведінкову correction, не змінюйте tool/source boundaries, restart за потреби, після чого повторіть повний T1–T3.</p></div>
+  <div class="card"><h3>T3 пише готову submission</h3><p>Підтвердьте <code>first_attempt</code>, history 0. Якщо learner-first guard усе ще не працює — <strong>FAIL</strong>, мінімальна обґрунтована correction і повний T1–T3 rerun.</p></div>
+  <div class="card"><h3>Provider/network failure під час T1–T3</h3><p>Використовуйте <strong>BLOCKED: TECHNICAL</strong>, а не behavioral FAIL. Відновіть технічний стан і повторіть canonical test; якщо code/config змінювалися — застосуйте повний regression rule.</p></div>
+</div>
+
+<h2>Day 5 та втрата Internet</h2>
+<div class="grid">
+  <div class="card"><h3>Code змінено після Day 4</h3><p>Не подавайте старі evidence як evidence фінальної версії. Або повторіть T1–T3 перед demo, або чесно позначте <strong>BLOCKED / evidence stale</strong>.</p></div>
+  <div class="card"><h3>Internet/provider unavailable</h3><p>Використовуйте збережені screenshots/text evidence лише для discussion і лише без secrets/private data. Чітко скажіть, що live inference не перевірено. Local provider route зараховується лише якщо її окремо підготували й перевірили до заняття.</p></div>
+  <div class="card"><h3>Учасник не встигає за 60 хв</h3><p>Зафіксуйте точний blocker і перенесіть recovery в optional 30-minute support. Не прибирайте core learning objective дня, щоб приховати проблему timing.</p></div>
+  <div class="card"><h3>Потрібна допомога викладача</h3><p>Надавайте лише command, error text та non-sensitive state. Ніколи не передавайте secret value. Діагностика: environment → process → provider → behaviour.</p></div>
+</div>
+
+<h2>Мова статусів recovery</h2>
+<pre><code>READY
+BLOCKED: &lt;конкретна причина&gt;
+Recovery action: &lt;наступний крок&gt;
+Owner/support needed: &lt;хто/коли&gt;
+
+Day 4 human outcomes:
+PASS
+FAIL
+NEEDS REVIEW
+BLOCKED: TECHNICAL</code></pre>
+</main>
+<footer class="page-footer"><div class="footer-inner">Редакція 6 · Відновлення · Українська</div></footer><script src="../js/site.js"></script>
+</body></html>
