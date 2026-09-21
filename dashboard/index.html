@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Training Activity Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Day 2 · synthetic practice project</p>
+      <h1>Training Activity Dashboard</h1>
+      <p>Eight fictional learner records are loaded from <code>data.json</code>. This project is deliberately small so you can focus on the vibe-coding workflow rather than framework complexity.</p>
+    </header>
+
+    <section class="notice" aria-label="Synthetic data notice">
+      <strong>Synthetic data only.</strong> These records do not describe real workshop participants.
+    </section>
+
+    <section class="kpi-grid" aria-label="Key indicators">
+      <article class="kpi-card">
+        <span>Total learners</span>
+        <strong id="total-learners">—</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Average attempts</span>
+        <strong id="average-attempts">—</strong>
+      </article>
+      <!-- DAY 2 ITERATION A: add a third KPI card for Completed learners. -->
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Synthetic learner records</p>
+          <h2>Activity status</h2>
+        </div>
+        <span id="load-status">Loading…</span>
+      </div>
+      <!-- DAY 2 ITERATION B: add one small control that can show only completed=false records, then return to all records. -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Learner</th>
+              <th scope="col">Attempts</th>
+              <th scope="col">Completed</th>
+              <th scope="col">Response time, s</th>
+            </tr>
+          </thead>
+          <tbody id="learner-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="challenge">
+      <h2>Day 2 challenge</h2>
+      <p><strong>Iteration A:</strong> use ChatGPT Plus as a supervised coding assistant to add a <strong>Completed learners</strong> KPI. Calculate it from the existing <code>completed</code> field. Expected value: <strong>6</strong>.</p>
+      <p><strong>Iteration B:</strong> add one <strong>Show learners needing follow-up</strong> control that filters the table to <code>completed = false</code> and can return to the full table. Expected filtered rows: <strong>Learner 04</strong> and <strong>Learner 07</strong>.</p>
+      <p>Keep the project vanilla HTML/CSS/JavaScript. Make the smallest useful changes, inspect <code>git diff</code>, prove one real restore, then reapply the accepted version.</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

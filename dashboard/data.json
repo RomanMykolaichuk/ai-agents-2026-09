@@ -1,0 +1,13 @@
+{
+  "activity": "Synthetic leadership learning activity",
+  "learners": [
+    {"id":"L01","name":"Learner 01","attempts":1,"completed":true,"response_seconds":62},
+    {"id":"L02","name":"Learner 02","attempts":2,"completed":true,"response_seconds":75},
+    {"id":"L03","name":"Learner 03","attempts":2,"completed":true,"response_seconds":81},
+    {"id":"L04","name":"Learner 04","attempts":1,"completed":false,"response_seconds":93},
+    {"id":"L05","name":"Learner 05","attempts":3,"completed":true,"response_seconds":88},
+    {"id":"L06","name":"Learner 06","attempts":2,"completed":true,"response_seconds":79},
+    {"id":"L07","name":"Learner 07","attempts":1,"completed":false,"response_seconds":104},
+    {"id":"L08","name":"Learner 08","attempts":2,"completed":true,"response_seconds":71}
+  ]
+}

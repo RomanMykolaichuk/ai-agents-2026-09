@@ -1,0 +1,16 @@
+# Participant secrets and local environments
+starter/.env
+starter/.venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local logs and temporary patches
+*.log
+*.patch
