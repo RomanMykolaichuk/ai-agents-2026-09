@@ -116,12 +116,12 @@ def _requires_course_material(message: str) -> bool:
 _SUBMISSION_BYPASS_PATTERNS = (
     re.compile(r"\bskip\s+my\s+attempt\b"),
     re.compile(
-        r"\b(?:write|draft|produce|give|provide)\b.{0,45}"
-        r"\b(?:complete|full|final)\b.{0,45}"
+        r"\b(?:write|draft|produce|give|provide)\b[^.!?\\n]{0,45}"
+        r"\b(?:complete|full|final)\b[^.!?\\n]{0,45}"
         r"\b(?:answer|conclusion|submission)\b"
     ),
     re.compile(
-        r"\b(?:write|draft|produce|give|provide)\b.{0,55}"
+        r"\b(?:write|draft|produce|give|provide)\b[^.!?\\n]{0,55}"
         r"\b(?:for\s+me\s+to\s+submit|on\s+my\s+behalf|so\s+i\s+can\s+submit)\b"
     ),
     re.compile(r"\b(?:do|complete)\s+(?:the\s+)?(?:assignment|submission)\s+for\s+me\b"),
