@@ -1,0 +1,71 @@
+name: Validate participant materials
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "starter/**"
+      - "dashboard/**"
+      - "web/**"
+      - "docs/**"
+      - ".github/workflows/validate.yml"
+  pull_request:
+    paths:
+      - "starter/**"
+      - "dashboard/**"
+      - "web/**"
+      - "docs/**"
+      - ".github/workflows/validate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: starter/requirements.txt
+
+      - name: Validate JSON
+        run: |
+          python -m json.tool dashboard/data.json >/dev/null
+          python -m json.tool starter/activity.json >/dev/null
+          python -m json.tool starter/instructor_tests.json >/dev/null
+          python -m json.tool web/data/site.json >/dev/null
+          python -m json.tool web/data/links.json >/dev/null
+          python -m json.tool web/data/ui.en.json >/dev/null
+          python -m json.tool web/data/ui.uk.json >/dev/null
+          python -m json.tool web/data/workbook.en.json >/dev/null
+          python -m json.tool web/data/workbook.uk.json >/dev/null
+
+      - name: Check participant paths and secrets
+        run: |
+          if grep -R "workshops/ai-agents-defence-education" web starter dashboard docs; then
+            echo "Old private-repository paths remain in participant materials."
+            exit 1
+          fi
+          if git ls-files --error-unmatch starter/.env >/dev/null 2>&1; then
+            echo "starter/.env must not be tracked."
+            exit 1
+          fi
+
+      - name: Install starter dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r starter/requirements.txt
+
+      - name: Compile and run offline checks
+        working-directory: starter
+        run: |
+          python -m py_compile app.py verify.py runtime_checks.py
+          python verify.py
+          python runtime_checks.py
